@@ -31,16 +31,22 @@
 
 ### O(1)
 
-```javaint n = 1000;System.out.println("Hey - your input is: " + n);
-	int n = 1000;System.out.println("Hey - your input is: " + n); 
-System.out.println("Hmm.. I'm doing more stuff with: " + n); 
+```java
+int n = 1000;
+System.out.println("Hey - your input is: " + n);
+
+int n = 1000;
+System.out.println("Hey - your input is: " + n);
+System.out.println("Hmm.. I'm doing more stuff with: " + n);
 System.out.println("And more: " + n);
 ```
 
 ### O(n)
 
 ```java
-for (int i = 1; i <= n; i++) {	System.out.println("Hey - I'm busy looking at: " + i);}
+for (int i = 1; i <= n; i++) {
+	System.out.println("Hey - I'm busy looking at: " + i);
+}
 ```
 
 ### O(n^2)
@@ -54,13 +60,18 @@ for (int i = 1; i <= n; i++) {
 ### O(log(n))
 
 ```java
-for (int i = 1; i < n; i = i * 2) {	System.out.println("Hey - I'm busy looking at: " + i);}
+for (int i = 1; i < n; i = i * 2) {
+	System.out.println("Hey - I'm busy looking at: " + i);
+}
 ```
 
 ### O(k^n)
 
 ```java
-int fib(int n) {	if (n <= 2) return n;	return fib(n - 1) + fib(n - 2);}
+int fib(int n) {
+	if (n <= 2) return n;
+	return fib(n - 1) + fib(n - 2);
+}
 ```
 
 ## 递归
