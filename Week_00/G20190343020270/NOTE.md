@@ -45,7 +45,7 @@ System.out.println("And more: " + n);
 
 ```java
 for (int i = 1; i <= n; i++) {
-	System.out.println("Hey - I'm busy looking at: " + i);
+    System.out.println("Hey - I'm busy looking at: " + i);
 }
 ```
 
@@ -53,7 +53,9 @@ for (int i = 1; i <= n; i++) {
 
 ```java
 for (int i = 1; i <= n; i++) { 
-	for (int j = 1; j <=n; j++) {		System.out.println("Hey - I'm busy looking at: " + i + " and " + j);	} 
+    for (int j = 1; j <=n; j++) {
+	    System.out.println("Hey - I'm busy looking at: " + i + " and " + j);
+	} 
 }
 ```
 
@@ -61,7 +63,7 @@ for (int i = 1; i <= n; i++) {
 
 ```java
 for (int i = 1; i < n; i = i * 2) {
-	System.out.println("Hey - I'm busy looking at: " + i);
+    System.out.println("Hey - I'm busy looking at: " + i);
 }
 ```
 
@@ -69,8 +71,8 @@ for (int i = 1; i < n; i = i * 2) {
 
 ```java
 int fib(int n) {
-	if (n <= 2) return n;
-	return fib(n - 1) + fib(n - 2);
+    if (n <= 2) return n;
+    return fib(n - 1) + fib(n - 2);
 }
 ```
 
