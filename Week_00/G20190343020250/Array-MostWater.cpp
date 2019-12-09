@@ -15,7 +15,6 @@ public:
             }
             else
             {
-                lalalla
                 TempMinHeight = height[i];
                 TempS = TempDistance * TempMinHeight; 
                 i++;
