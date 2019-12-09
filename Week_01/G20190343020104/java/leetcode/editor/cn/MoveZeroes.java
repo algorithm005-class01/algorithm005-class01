@@ -30,14 +30,14 @@ public class MoveZeroes {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public void moveZeroes(int[] nums) {
-            //j记录了非0数字应该要替换的位置
-            int j = 0;
+            int snowBallSize = 0;
             for (int i = 0; i < nums.length; i++) {
-                if (nums[i] != 0) {
-                    int temp = nums[i];
-                    nums[i] = nums[j];
-                    nums[j] = temp;
-                    j++;
+                if (nums[i] == 0) {
+                    snowBallSize++;
+                } else {
+                    int num = nums[i];
+                    nums[i] = 0;
+                    nums[i - snowBallSize] = num;
                 }
             }
         }
