@@ -30,6 +30,7 @@ public class MoveZeroes {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public void moveZeroes(int[] nums) {
+            //j记录了非0数字应该要替换的位置
             int j = 0;
             for (int i = 0; i < nums.length; i++) {
                 if (nums[i] != 0) {
@@ -40,6 +41,7 @@ public class MoveZeroes {
                 }
             }
         }
+
     }
 //leetcode submit region end(Prohibit modification and deletion)
 
