@@ -3,10 +3,10 @@ import java.util.HashMap;
 
 /**
  * @Author huangxiong
- * @Date 2019/12/1
+ * @Date 2019/12/10
  * @Description two sum
  **/
-public class Code_1 {
+public class LeetCode_1_0110 {
     //用hashmap,时间复杂度为O(n)
     public int[] twoSum(int[] nums, int target) {
         String s = new String();
@@ -30,13 +30,5 @@ public class Code_1 {
             }
         }
         throw new IllegalArgumentException("No two sum solution");
-    }
-
-    public static void main(String[] args) {
-        double[] u = {0.8, 0.83333, 1.5, 1.5, 3.0};
-        Arrays.sort(u);
-        for (int i = 0; i < u.length; i++) {
-            System.out.println(u[i]);
-        }
     }
 }
