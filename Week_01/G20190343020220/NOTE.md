@@ -19,3 +19,11 @@
 
 时间复杂度: o(n) 因为最慢的0到nums.length-1次反转. 是O(n)
 空间负责度: o(1)
+
+### https://leetcode-cn.com/problems/merge-two-sorted-lists/
+
+dump头结点解法: 设置一个dump节点. 动态的改变dump.next指针. 直到l1和l2遍历完成.
+
+
+时间负责度: o(n+m) 因为每次迭代中都有一个node添加到dump链表中. while循环遍历完成l1和l2的总长度. 改变指针的操作是常数级别的. 所以是线性的
+空间负责度: o(1) 是恒定不变的.
