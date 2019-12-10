@@ -1,9 +1,9 @@
 /**
  * @Author huangxiong
- * @Date 2019/11/11
+ * @Date 2019/12/10
  * @Description leetcode题目26
  **/
-public class Code_26 {
+public class LeetCode_26_0110 {
     /**
      * 数组完成排序后，我们可以放置两个指针 ii 和 jj，其中 ii 是慢指针，
      * 而 jj 是快指针。只要 nums[i] = nums[j]nums[i]=nums[j]，我们就增加 jj 以跳过重复项。
