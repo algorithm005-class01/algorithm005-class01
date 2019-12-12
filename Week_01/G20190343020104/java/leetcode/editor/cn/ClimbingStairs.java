@@ -29,7 +29,7 @@ public class ClimbingStairs {
     public static void main(String[] args) {
         Solution solution = new ClimbingStairs().new Solution();
 
-        System.out.println(solution.climbStairs(11));
+        System.out.println(solution.climbStairs(20));
     }
 
 
@@ -37,29 +37,36 @@ public class ClimbingStairs {
     class Solution {
         /**
          * 1.傻递归
-         *
+         * 2.记忆递归
          * @param n
          * @return
          */
         public int climbStairs(int n) {
-            return climb_Stairs(0, n);
+            int[] ns = new int[n + 1];
+            return climb_Stairs(0, n, ns);
         }
 
         /**
-         * 暴力递归
+         * 递归
          *
          * @param i 起始台阶
          * @param n 台阶数
+         * @param ns
          * @return
          */
-        public int climb_Stairs(int i, int n) {
+        public int climb_Stairs(int i, int n, int[] ns) {
             if (i > n) {
                 return 0;
             }
             if (i == n) {
                 return 1;
             }
-            return climb_Stairs(i + 1, n) + climb_Stairs(i + 2, n);
+            if (ns[i] > 0) {
+                return ns[i];
+            }
+            ns[i] = climb_Stairs(i + 1, n, ns) + climb_Stairs(i + 2, n, ns);
+            return ns[i];
+
         }
 
     }
