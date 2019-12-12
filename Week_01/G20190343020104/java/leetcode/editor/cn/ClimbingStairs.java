@@ -28,6 +28,8 @@ package leetcode.editor.cn;
 public class ClimbingStairs {
     public static void main(String[] args) {
         Solution solution = new ClimbingStairs().new Solution();
+
+        System.out.println(solution.climbStairs(11));
     }
 
 
@@ -40,26 +42,26 @@ public class ClimbingStairs {
          * @return
          */
         public int climbStairs(int n) {
-            if (n == 1) {
+            return climb_Stairs(0, n);
+        }
+
+        /**
+         * 暴力递归
+         *
+         * @param i 起始台阶
+         * @param n 台阶数
+         * @return
+         */
+        public int climb_Stairs(int i, int n) {
+            if (i > n) {
+                return 0;
+            }
+            if (i == n) {
                 return 1;
             }
-            if (n == 2) {
-                return 2;
-            }
-
-            if (n == 3) {
-                return climbStairs(1) + climbStairs(2);
-            }
-
-            if (n == 4) {
-                return climbStairs(1) + climbStairs(2) + climbStairs(3);
-            }
-            for (int i = 0; i < n; i++) {
-
-            }
-
-            return n;
+            return climb_Stairs(i + 1, n) + climb_Stairs(i + 2, n);
         }
+
     }
 //leetcode submit region end(Prohibit modification and deletion)
 
