@@ -42,15 +42,14 @@ public class RotateArray {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public void rotate(int[] nums, int k) {
-            int temp, pre;
-            for (int i = 0; i < k; i++) {
-                //第1位的上一个就是最后一位。
-                pre = nums[nums.length - 1];
-                for (int j = 0; j < nums.length; j++) {
-                    temp = nums[j];
-                    nums[j] = pre;
-                    pre = temp;
-                }
+            int[] a = new int[nums.length];
+            for (int i = 0; i < nums.length; i++) {
+                //取余数
+                int j = (i + k) % nums.length;
+                a[j] = nums[i];
+            }
+            for (int i = 0; i < a.length; i++) {
+                nums[i] = a[i];
             }
         }
     }
