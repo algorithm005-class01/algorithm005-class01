@@ -103,3 +103,12 @@ addF和deleteL 或者 addL和deleteF 是队列模式
 在任何时候 head和tail指针相遇的时候, 说明数组满了. 我们需要扩容. 扩容为原数组的2被. 
 
 ### https://leetcode-cn.com/problems/trapping-rain-water/ 接雨水
+
+解题思路: 左右指针往中间遍历. 找左最大柱子和右最大柱子. 
+
+
+当left<right高度时 当左指针遇到小于左最大柱子的. 盛水的res加上当期的的雨水容量 = leftMax- height[left]; 反之left++; 
+
+反之是一样的. 
+
+
