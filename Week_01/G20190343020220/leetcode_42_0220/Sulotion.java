@@ -1,4 +1,4 @@
-package trappingrainwater;
+package leetcode_42_0220;
 
 
 /*

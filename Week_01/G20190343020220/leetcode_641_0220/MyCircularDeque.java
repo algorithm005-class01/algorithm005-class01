@@ -1,4 +1,4 @@
-package designcirculardeque;
+package leetcode_641_0220;
 /*
 设计实现双端队列。
 你的实现需要支持以下操作：
