@@ -1,6 +1,6 @@
 学习笔记
 
-## leetcode解题总结
+## leetcode刷题解题总结
 
 ### https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/ 去除重复元素
 
@@ -111,4 +111,93 @@ addF和deleteL 或者 addL和deleteF 是队列模式
 
 反之是一样的. 
 
+## 用addFirst和addLast改写
+
+```java
+Deque<String> deque = new LinkedList<String>();
+deque.push("a");
+deque.push("b");
+deque.push("c");
+System.out.println(deque);
+String str = deque.peek();
+System.out.println(str);
+System.out.println(deque);
+while (deque.size() > 0) {
+ System.out.println(deque.pop());
+}
+System.out.println(deque);
+```
+
+改写代码
+```java
+    System.out.println("--------------------------------------------");
+
+        Deque<String> deque1 = new ArrayDeque<>();
+        deque1.addFirst("a");
+        deque1.addFirst("b");
+        deque1.addFirst("c");
+        System.out.println(deque1);
+        String s = deque1.peekFirst();
+        System.out.println(s);
+        System.out.println(deque1);
+        while (deque1.size() > 0) {
+            System.out.println(deque1.removeFirst());
+        }
+        System.out.println(deque1);
+
+
+        System.out.println("--------------------------------------------");
+
+        Deque<String> deque2 = new ArrayDeque<>();
+        deque2.addLast("a");
+        deque2.addLast("b");
+        deque2.addLast("c");
+        /*这里打印的顺序是出入的 但是出队和入队的元素是符合队列规范的 主要和实现方式有关.*/
+        System.out.println(deque2);
+        String s1 = deque2.peekLast();
+        System.out.println(s1);
+        /*这里打印的顺序是出入的 但是出队和入队的元素是符合队列规范的*/
+        System.out.println(deque2);
+        while (deque2.size() > 0) {
+            System.out.println(deque2.removeLast());
+        }
+        System.out.println(deque2);
+    }
+```
+
+
+## queue和priorityQueue的源码分析
+
+### queue的源码分析
+
+Queue 在java的源码中是个接口. 定义了队列的实现的行为规范. 
+
+实现类中非两类. 
+1. 数组实现的  基本上都是基于环形数组的实现的. 
+比如ArrayBlockingQueue, 维护两个指针, putIndex和takeIndex. 每次添加元素putIndex++. 当putIndex=数组长度是归零.takeIndex也是同样的道理.
+每次出队操作从数组头部开始取数据.然后++. 当takeIndex大小等于数组长度时. 归零. 应为是阻塞队列. 所以不需要扩容操作.  时间复杂度都是o1
+2. 链表实现的   LinkedBlockingQueue 基于单链表实现的 入队. 添加到数组尾部. 维护tail的next指针, 更新tail即可. 时间复杂度o1. 出队. 切断head的next指针. 使得head.next成为新的head.
+
+时间复杂度也是o1
+
+### priorityQueue源码分析
+
+优先级队列, 队列中的循序不是基于元素大小的. 而是基于给定的比较函数. 内部实现为堆. 
+
+在java的实现中呢, 原语义呢是按照小顶堆来实现的优先队列, 至于这个小用户怎么去定义. 完全通过实现接口去实现. 比如你想实现一个大顶堆. 那么你只需要将 2 < 1 认为是ture. 那么根上的元素就是最大的.
+
+所以这里的大小是相对. 优先级的定义也是用户自己定义的. Comparable<T>实现这个接口即可. 
+
+堆是一个被完全填满的二叉树,有可能的例外是底层.底层的元素从左到右填入,这样的树称为完全二叉树.
+
+因为完全二叉树这么有规律.所以它可以用一个数组表示而不需要使用链.
+
+对于数组中任一位置i上的元素.其左儿子在位置2i上,右儿子在左儿子后的单元2i+1中.它的父亲则在位置i/2上.
+
+因此优先级最高的元素呢 即在根上, 
+
+入队是将元素添加到数组最后一个位置, 然后上浮. 上浮的意思是依次和父节点比较优先级. 如果新添加的元素.compareTo(parent) >=0 为false. 即交互父子位置. 直到为true.
+出队是删除根元素. 然后取数组尾部元素填充到根上, 执行下潜操作. 下潜是 依次和左儿子比较大小 在和右儿子比较大小. 如直到找到合适位置. 
+
+入队和出队时间复杂度是O(logn)的.
 
