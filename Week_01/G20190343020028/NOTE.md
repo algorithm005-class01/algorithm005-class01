@@ -104,3 +104,68 @@ class Solution {
 
 用最热题解里的评论来说，我好像不具备人类的聪明才智。
 
+``` Java
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        if (nums == null || nums.length < 3) {
+            return result;
+        }
+        Arrays.sort(nums);
+        for (int i = 0; i < nums.length - 2; i++) {
+            // 如果最小值大于0，和一定大于0，不符合要求
+            if (nums[i] > 0) {
+                return result;
+            }
+            // 最小值相同的情况下，属于重复情况
+            if (i > 0 && nums[i] == nums[i - 1]) {
+                continue;
+            }
+            int left = i + 1, right = nums.length - 1;
+            while (left < right) {
+                int sum = nums[i] + nums[left] + nums[right];
+                if (sum == 0) { // 三数之和为0，即所求解，将当前组合计入返回结果
+                    result.add(Arrays.asList(nums[i], nums[left], nums[right]));
+                    while (left < right && nums[left] == nums[left + 1]) {
+                        left++;
+                    }
+                    while (left < right && nums[right - 1] == nums[right]) {
+                        right--;
+                    }
+                    left++;
+                    right--;
+                } else if (sum < 0) {
+                    left++;
+                } else {
+                    right--;
+                }
+            }
+        }
+        return result;
+    }
+}
+```
+
+## 1. 两数之和
+
+看完三数之和，再来回顾两数之和，比较好理解了。
+
+`X + Y = N` 即 `Y = N - X`，使用这个思路即可减少一次嵌套循环。
+
+``` Java
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        Map<Integer, Integer> map = new HashMap<>();
+        int[] result = null;
+        for (int i = 0; i < nums.length; i++) {
+            int complement = target - nums[i];
+            if (map.containsKey(complement)) {
+                result = new int[]{map.get(complement), i};
+                break;
+            }
+            map.put(nums[i], i);
+        }
+        return result;
+    }
+}
+```
