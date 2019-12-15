@@ -17,7 +17,7 @@ class Solution:
         # 否则，就将prehead的后继指向l2，此后，l2前进一步
             else:
                 prehead.next, l2 = l2, l2.next
-                prehead = prehead.next
+            prehead = prehead.next
            # 需要考虑l1和l2不等长的情况
            # 如果l1不为空就将p.next指向l2
             # 如果l1为空就指向l2，如果l2也为空那就指向空
