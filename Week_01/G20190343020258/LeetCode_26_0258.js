@@ -1,4 +1,3 @@
-// 双指针
 var removeDuplicates = function(nums) {
     if(nums == null && nums.length <0) return 0;
     let i = 0;
