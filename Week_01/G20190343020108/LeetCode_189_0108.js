@@ -1,29 +1,9 @@
-/** 解法一：暴力法
+/**
  * @param {number[]} nums
  * @param {number} k
  * @return {void} Do not return anything, modify nums in-place instead.
  */
 var rotate = function(nums, k) {
-    const size = nums.length;
-    if (size < 2) return;
-    const offset = k % size;
-    for (let i = 0; i < offset; i++) {
-        // 外层循环记录移动趟数
-        // 内层循环数组群移
-        let temp = nums[size - 1];
-        for (let j = size - 1; j > 0; j--) {
-            nums[j] = nums[j - 1];
-        }
-        nums[0] = temp;
-    }
-};
-
-/** 解法二：倒序法
- * @param {number[]} nums
- * @param {number} k
- * @return {void} Do not return anything, modify nums in-place instead.
- */
-var rotate2 = function(nums, k) {
     const size = nums.length;
     if (size < 2) return;
     const offset = k % size;
@@ -40,5 +20,3 @@ const reversePartial = (arr, start, end) => {
         end--;
     }
 };
-
-module.exports = { rotate, rotate2 };

@@ -17,5 +17,3 @@ var merge = function(nums1, m, nums2, n) {
     // 如果 p2 >0 代表 nums2 还有剩余元素，将其继续添加到 nums1 中
     while (p2 >= 0) nums1[p--] = nums2[p2--];
 };
-
-module.exports = merge;
