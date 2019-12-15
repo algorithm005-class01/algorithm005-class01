@@ -18,6 +18,15 @@
 | --- | --- | --- | --- |
 | O(n) | O(n) | O(n) |
 
+## 4. 栈、队列、优先队列、双端队列
+
+### 时间复杂度
+
+| | 栈 Stack | 队列 Queue | 双端队列 Deque | 优先队列 Priority Queue |
+| --- | --- | --- | --- | --- |
+| insert & delete | O(1) | O(1) | O(1) | O(1) |
+| lookup | O(n) | O(n) | O(n) | O(log n) |
+
 # 解题思路
 
 ## 1
@@ -40,6 +49,18 @@ https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/
 
 1. 初始化不重复元素的下标 j 为 0
 2. 依次读取数组，将元素与 j 对应的元素做比较，若两者不重复，则 j + 1，并将 j + 1 位置的元素值设置为当前元素的值
+
+## 42
+
+https://leetcode-cn.com/problems/trapping-rain-water/submissions/
+
+通过栈来缓存和比较边界高度，合计出面积。
+
+## 61
+
+https://leetcode-cn.com/problems/plus-one/submissions/
+
+倒序遍历数组元素，若 +1 后不进位则直接返回。进位则继续遍历下一个元素，若全部元素都被遍历了，则新建一个以 1 开头，长度为原元素长度且填充 0 的数组。
 
 ## 88
 
@@ -64,8 +85,8 @@ https://leetcode-cn.com/problems/move-zeroes/
 
 通过双指针遍历数组，将非 0 值往前移动，余下的位置全部设置为 0
 
-# TODO
+## 641
 
-https://leetcode-cn.com/problems/plus-one/
-https://leetcode.com/problems/design-circular-deque
-https://leetcode.com/problems/trapping-rain-water/
+https://leetcode-cn.com/problems/design-circular-deque/submissions/
+
+用数组实现即可。
