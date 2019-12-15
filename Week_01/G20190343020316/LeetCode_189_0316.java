@@ -1,4 +1,4 @@
-class Solution {
+class LeetCode_189_0316 {
 
     // 旋转数组
     public void rotate(int[] nums, int k) {
