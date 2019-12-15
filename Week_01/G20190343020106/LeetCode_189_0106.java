@@ -43,7 +43,7 @@ class Solution {
 
         int n = nums.length;
 
-        k = k % n;
+        k %= n;
         rotateRange(0, n - k - 1, nums);
         rotateRange(n - k, n - 1, nums);
         rotateRange(0, n - 1, nums);
