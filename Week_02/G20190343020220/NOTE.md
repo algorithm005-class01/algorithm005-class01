@@ -66,4 +66,11 @@ jdk1.8的put方法执行流程是:
 
 
 
+ ## leetcode刷题
  
+ ### https://leetcode-cn.com/problems/valid-anagram/submissions/ 是否为异位词
+ 
+ 解题思路: 映射表
+ 当字符串s和t 长度不相等时. false
+ 
+ 构建一个26个字母的int数组, 遍历其中一个字符串的.  因为都是小写字母. 所以当一个小写的char-'a' 就会得到这些字母对于的ASCII码值. 当任何一个位置!=0时, 返回false
