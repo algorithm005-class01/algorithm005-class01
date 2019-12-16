@@ -24,7 +24,7 @@ class Solution(object):
 # 寻找最矮的柱子左边最大面积的矩形
 # 寻找最矮柱子右边最大面积的矩形
 
-#代码问题 同样一个测试样例，用本地的ide可以计算出正确的结果，但是leetcode 计算出的是错误的
+#代码问题 同样一个测试样例，用本地的ide可以计算出正确的结果，但是leetcode 计算出的是错误的，后续修改了代码，end少了加一。
 class Solution(object):
     def largestRectangleArea(self, heights):
         """
@@ -39,7 +39,7 @@ class Solution(object):
             return 0               
 
         min_index = start                                
-        for i in range(start,end):
+        for i in range(start,end+1):               #加一操作，这里做错了
             if heights[min_index] > heights[i]:         #只存最矮的柱子的索引
                 min_index = i
         max1 = heights[min_index] *(end - start + 1)    #找到最矮的柱子，算它的面积
