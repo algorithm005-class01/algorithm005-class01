@@ -1,0 +1,14 @@
+Deque<String> deque = new LinkedList<String>();
+deque.addFirst("a");
+deque.addLast("a");
+deque.addLast("a");
+System.out.println(deque);
+
+String str = deque.peekLast();
+System.out.println(str);
+System.out.println(deque);
+
+while(deque.size > 0) {
+	System.out.println(deque.popLast());
+}
+System.out.println(deque);
