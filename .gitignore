@@ -85,4 +85,6 @@ hs_err_pid*
 *.out
 *.app
 
+.idea/
+venv/
 
