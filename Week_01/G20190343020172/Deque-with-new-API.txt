@@ -1,0 +1,6 @@
+Deque<String> deque = new LinkedList<>();
+
+deque.addFirst("a");
+deque.addLast("b");
+deque.addLast("c");
+System.out.println(deque);
