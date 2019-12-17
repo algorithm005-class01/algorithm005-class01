@@ -97,4 +97,14 @@ jdk1.8的put方法执行流程是:
  解题思路: 借助栈的方式 创建栈空间. 遍历栈元素和树. 只要当期根节点不为null, 将节点放入栈里, 继续沿着左子树继续前进. 直到左子树为null的是有. 既是找到了树的最左端. 
  弹出栈顶元素. 打印他. 然后向右.
  
+ 解题思路: 莫里斯遍历法
+ 
+ 取得树的root节点curr. 
+ 如果curr.left == null 打印curr.val. curr = curr.right;
+ curr.left != null. pre = curr.left, 找打pre中最右的节点. 为pre.right. 将 pre.right = curr;
+ 将curr赋值为temp. 将curr = curr.left; 
+ 
+ 直到curr == null;
+ 
+ 
  
