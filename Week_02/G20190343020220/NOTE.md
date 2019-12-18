@@ -121,3 +121,10 @@ jdk1.8的put方法执行流程是:
  
  解题思路: 递归法, 左右根. 注意避免使用全局变量的使用.  从左到右顺序依次递归树的孩子树, 最后打印根节点
  
+  
+ ### https://leetcode-cn.com/problems/n-ary-tree-preorder-traversal/submissions/ N叉树的前序遍历
+ 
+ 解题思路: 递归法. 根,孩子节点从左到右依次遍历
+ 
+ 
+ 
