@@ -117,4 +117,7 @@ jdk1.8的put方法执行流程是:
  时间复杂度 O(n)  空间复杂度 O(n)  栈空间
  解题思路: 莫里斯遍历.  构建线索树 
  
+ ### https://leetcode-cn.com/problems/n-ary-tree-postorder-traversal/ N叉树的后序遍历
+ 
+ 解题思路: 递归法, 左右根. 注意避免使用全局变量的使用.  从左到右顺序依次递归树的孩子树, 最后打印根节点
  
