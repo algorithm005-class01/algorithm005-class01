@@ -99,7 +99,7 @@ jdk1.8的put方法执行流程是:
  
   时间复杂度 O(n)  空间复杂度 O(n)
  
- 解题思路: 莫里斯遍历法
+ 解题思路: 莫里斯遍历法  按照中序遍历顺序构建线索树
  
  取得树的root节点curr. 
  如果curr.left == null 打印curr.val. curr = curr.right;
@@ -110,5 +110,11 @@ jdk1.8的put方法执行流程是:
  
  时间复杂度 O(n)  空间复杂度 O(n)
  
+ ### https://leetcode-cn.com/problems/binary-tree-preorder-traversal/ 二叉树的前序遍历
+ 
+ 解题思路: 递归解法. 根左右.  时间复杂度 O(n)  空间负责度 O(logn)
+ 解题思路: 利用栈遍历. 先将root添加到栈中. 遍历stack直到为null. 弹出栈顶元素. 如果right != null 将right压入栈. 如果left!=null 将left压入栈.  先压right后left
+ 时间复杂度 O(n)  空间复杂度 O(n)  栈空间
+ 解题思路: 莫里斯遍历.  构建线索树 
  
  

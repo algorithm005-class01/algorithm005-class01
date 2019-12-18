@@ -82,7 +82,13 @@ public class Sulotion {
         return res;
     }
 
-    public class TreeNode {
+    public static void main(String[] args) {
+        TreeNode treeNode = new TreeNode(1);
+
+    }
+
+
+    public static class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;
