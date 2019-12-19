@@ -1,0 +1,37 @@
+class Solution {
+    /**
+     * 1.递归求解
+     * @param root
+     * @return
+     */
+    public List<Integer> preorderTraversal(TreeNode root) {
+        List<Integer> listValues = new LinkedList<>();
+        if(root == null){
+            return listValues;
+        }
+        //1.先添加根节点
+        listValues.add(root.val);
+        //2.左子树
+        if (root.left != null) {
+            printTreeNoe(root.left, listValues);
+        }
+        //3.右子树
+        if (root.right != null) {
+            printTreeNoe(root.right, listValues);
+        }
+        return listValues;
+    }
+
+   public void printTreeNoe(TreeNode root, List<Integer> valus) {
+        if (root == null) {
+            return;
+        }
+        valus.add(root.val);
+        if (root.left != null) {
+            printTreeNoe(root.left,valus);
+        }
+        if (root.right != null) {
+            printTreeNoe(root.right,valus);
+        }
+    }
+}
