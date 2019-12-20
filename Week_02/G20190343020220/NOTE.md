@@ -155,9 +155,12 @@ root 右子树的结束就在于pre集合遍历完成.
 ### https://leetcode-cn.com/problems/combinations/submissions/ 77 组合
 
 解题思路: 递归法.
+例如 n=4 k=2;
+1,2,3,4. 枚举 两两组合
 
 从1开始枚举. 用列表 temp 收集枚举信息. 当temp.size() == k 的时候说明枚举完成, 
-从start 到 n-(k - temp.size()) + 1 之间循环
+
+
   
  
  
