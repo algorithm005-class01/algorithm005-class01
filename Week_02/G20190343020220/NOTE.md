@@ -152,7 +152,12 @@ root 右子树的结束就在于pre集合遍历完成.
 
 依赖pre和in两个指针, 分别标记集合的遍历.
 
+### https://leetcode-cn.com/problems/combinations/submissions/ 77 组合
 
+解题思路: 递归法.
+
+从1开始枚举. 用列表 temp 收集枚举信息. 当temp.size() == k 的时候说明枚举完成, 
+从start 到 n-(k - temp.size()) + 1 之间循环
   
  
  
