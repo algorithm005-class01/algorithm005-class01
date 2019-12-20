@@ -142,7 +142,17 @@ jdk1.8的put方法执行流程是:
  时间复杂度 O(N) 因为要遍历完整个树
  空间复杂度 O(N) 
  
+ ### https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/ 105. 从前序与中序遍历序列构造二叉树
  
+ 解题思路: 递归法  分别构建left 和 right 子树.
+ 
+依据前序遍历, 很容易找到树的root 节点. 
+root左子树的结束就是在中序中扎到了自己. 
+root 右子树的结束就在于pre集合遍历完成. 
+
+依赖pre和in两个指针, 分别标记集合的遍历.
+
+
   
  
  
