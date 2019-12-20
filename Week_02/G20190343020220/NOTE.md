@@ -132,6 +132,18 @@ jdk1.8的put方法执行流程是:
  解题思路: 队列遍历法. 广度优先算法. 
  
  
+ ### https://leetcode-cn.com/problems/symmetric-tree/submissions/ 236 二叉树的最近公共祖先
+ 
+ 解题思路: 递归法.  
+ 
+ 边界条件: root ==null, 或者找到p或者q. 也就是root分别和他们想等.
+ 进行式 :  分别向root.left和root.right进行 如果分别能够找到p和q. 那么说明在p和q在分别左右子树上. root就是最近公共祖先. 否则一方为null, 另一方既是.
+ 
+ 时间复杂度 O(N) 因为要遍历完整个树
+ 空间复杂度 O(N) 
+ 
+ 
+  
  
  
  
