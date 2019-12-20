@@ -1,0 +1,5 @@
+HashMap的小结
+
+- put()要调用putVal()，里面对key value是做了hash处理的
+- 同理，get()要调用getNode（），里面对key value是做了hash处理的
+- putVal()和getNode()都调用hash(),散列表技术对key value进行处理
