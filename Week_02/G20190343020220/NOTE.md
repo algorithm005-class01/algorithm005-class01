@@ -127,4 +127,11 @@ jdk1.8的put方法执行流程是:
  解题思路: 递归法. 根,孩子节点从左到右依次遍历
  
  
+ ### https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/ N叉树的层序遍历
+ 
+ 解题思路: 队列遍历法. 广度优先算法. 
+ 
+ 
+ 
+ 
  
