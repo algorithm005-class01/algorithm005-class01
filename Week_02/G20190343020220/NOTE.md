@@ -78,11 +78,13 @@ jdk1.8的put方法执行流程是:
  时间复杂度: O(n) 
  空间复杂度: O(1) 因为固定26个大小的数组
  
- ### https://leetcode-cn.com/problems/group-anagrams/submissions/ 字母异位词分组
+ ### https://leetcode-cn.com/problems/group-anagrams/submissions/ 49 字母异位词分组 
  
  解题思路: 哈希表
  
- 遍历整个异位词数组. 然后将字符串s排序.得到新字符串n, (异位词排序后字符串是相等的)  然后判断n是否哈希表中. 如果存在在哈希表中. 取得list将字符串s添加到list中. 不存在将n添加到哈希表中.
+遍历整个异位词数组. 对异位词s,进行排序得到news, 所有的异位词排序后都相等. 借助哈希表, 当news不在哈希表中, 构建一个list. 将news和list添加到哈希表中. 当news在哈希表中. 取出list,将s添加到list中.
+
+循环结束. 异位词分组就完成了
  
  ### https://leetcode-cn.com/problems/two-sum/
  
@@ -90,12 +92,12 @@ jdk1.8的put方法执行流程是:
  
  遍历数组, 计算每个元素s和target的差. 判定差值是否在map中, 存在那么当前的下标i和map中存在的下j, 相加=target的组合,  不存在将元素s当k, v为下标 添加到哈希表中
  
- ### https://leetcode-cn.com/problems/binary-tree-inorder-traversal/ 二叉树的中序遍历
+ ### https://leetcode-cn.com/problems/binary-tree-inorder-traversal/ 94 二叉树的中序遍历
  
  解题思路: 递归方式   经典的左根右. 递归向树的左走, 直到为left为null,  时间复杂度 O(n), 空间复杂度 O(logn)
  
- 解题思路: 借助栈的方式 创建栈空间. 遍历栈元素和树. 只要当期根节点不为null, 将节点放入栈里, 继续沿着左子树继续前进. 直到左子树为null的是有. 既是找到了树的最左端. 
- 弹出栈顶元素. 打印他. 然后向右.
+ 解题思路: 借助栈的方式 创建栈空间. 遍历栈元素和当期树. 一直向树的左子树遍历. 沿途所有的节点依次加入栈中.直到找到最左叶子节点. 
+ 弹出叶子节点. 打印这个叶子节点. 当期树向右前进.
  
   时间复杂度 O(n)  空间复杂度 O(n)
  
