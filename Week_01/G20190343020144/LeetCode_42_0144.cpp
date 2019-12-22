@@ -24,7 +24,7 @@ public:
         stack<int> st;
         while (current < height.size())
         {
-            // pop 栈的条件
+            // pop 栈的条件, 比栈顶高才pop , 否则一直压栈, 低的不是接雨水-水坑的边界
             while (!st.empty() && height[current] > height[st.top()])
             {
                 int top = st.top();
