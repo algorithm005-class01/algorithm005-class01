@@ -1,11 +1,9 @@
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
+        if nums == []:
+            return [[]]
         res = []
-        if len(nums) == 0:
-            res.append([])
-        else:
-            subnum = nums[1:]
-            for e in self.subsets(subnum):
-                res.append(e)
-                res.append([nums[0]]+e)
+        for e in self.subsets(nums[1:]):
+            res.append(e)
+            res.append([nums[0]]+e)
         return res
