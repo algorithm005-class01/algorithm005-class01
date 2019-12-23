@@ -11,11 +11,11 @@ class Solution:
         if not digits: return []
         if len(digits) == 1: return phone[digits]
         
-        def addone(digit: str, prefix: List[str]) -> List[str]:
+        def addone(prefix: List[str], digit: str) -> List[str]:
             res = []
             for ch in phone[digit]:
                 for s in prefix:
                     res.append(s + ch)
             return res
         sub = digits[:-1]
-        return addone(digits[-1], self.letterCombinations(sub))
+        return addone(self.letterCombinations(sub),digits[-1])
