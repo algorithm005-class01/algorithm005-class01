@@ -44,6 +44,6 @@ public class Sulotion {
     }
 
     public static void main(String[] args) {
-        System.out.println('C' - 'a');
+        System.out.println('c' - 'a');
     }
 }
