@@ -1,0 +1,29 @@
+class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> listNode = new LinkedList<>();
+        if(root == null){
+            return listNode;
+        }
+        if(root.left != null){
+            printinOrder(root.left,listNode);
+        }
+        listNode.add(root.val);
+        if(root.right != null){
+            printinOrder(root.right,listNode);
+        }
+        return listNode;
+    }
+    void printinOrder(TreeNode root, List<Integer> listNode){
+        if(root == null){
+            return;
+        }
+        if(root.left != null){
+            printinOrder(root.left,listNode);
+        }
+        listNode.add(root.val);
+
+        if(root.right != null){
+            printinOrder(root.right,listNode);
+        }
+    }
+}
