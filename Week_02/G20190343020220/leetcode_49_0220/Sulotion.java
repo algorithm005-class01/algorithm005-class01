@@ -26,7 +26,7 @@ import java.util.*;
 public class Sulotion {
     public List<List<String>> groupAnagrams(String[] strs) {
         List<List<String>> list = new ArrayList<>();
-        Map<String, List<String>> map = new HashMap<>();
+        Map<String, List<String>> map = new HashMap<>(strs.length);
         for (String s : strs) {
             char[] array = s.toCharArray();
             Arrays.sort(array);

@@ -1,0 +1,20 @@
+class Solution {
+    public List<Integer> preorder(Node root) {
+        List<Integer> results = new ArrayList<>();
+        if(root == null){
+            return results;
+        }
+        results.add(root.val);
+        addchildNode(root,results);
+        return results;
+    }
+    void addchildNode(Node root ,List results){
+        if(root.children == null || root.children.size() ==0){
+            return;
+        }
+        for (Node child:root.children) {
+            results.add(child.val);
+            addchildNode(child,results);
+        }
+    }
+}

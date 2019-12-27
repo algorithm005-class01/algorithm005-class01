@@ -78,14 +78,106 @@ jdk1.8的put方法执行流程是:
  时间复杂度: O(n) 
  空间复杂度: O(1) 因为固定26个大小的数组
  
- ### https://leetcode-cn.com/problems/group-anagrams/submissions/ 字母异位词分组
+ ### https://leetcode-cn.com/problems/group-anagrams/submissions/ 49 字母异位词分组 
  
  解题思路: 哈希表
  
- 遍历整个异位词数组. 然后将字符串s排序.得到新字符串n, (异位词排序后字符串是相等的)  然后判断n是否哈希表中. 如果存在在哈希表中. 取得list将字符串s添加到list中. 不存在将n添加到哈希表中.
+遍历整个异位词数组. 对异位词s,进行排序得到news, 所有的异位词排序后都相等. 借助哈希表, 当news不在哈希表中, 构建一个list. 将news和list添加到哈希表中. 当news在哈希表中. 取出list,将s添加到list中.
+
+循环结束. 异位词分组就完成了
  
  ### https://leetcode-cn.com/problems/two-sum/
  
  解题思路: 哈希表
  
  遍历数组, 计算每个元素s和target的差. 判定差值是否在map中, 存在那么当前的下标i和map中存在的下j, 相加=target的组合,  不存在将元素s当k, v为下标 添加到哈希表中
+ 
+ ### https://leetcode-cn.com/problems/binary-tree-inorder-traversal/ 94 二叉树的中序遍历
+ 
+ 解题思路: 递归方式   经典的左根右. 递归向树的左走, 直到为left为null,  时间复杂度 O(n), 空间复杂度 O(logn)
+ 
+ 解题思路: 借助栈的方式 创建栈空间. 遍历栈元素和当期树. 一直向树的左子树遍历. 沿途所有的节点依次加入栈中.直到找到最左叶子节点. 
+ 弹出叶子节点. 打印这个叶子节点. 当期树向右前进.
+ 
+  时间复杂度 O(n)  空间复杂度 O(n)
+ 
+ 解题思路: 莫里斯遍历法  按照中序遍历顺序构建线索树
+ 
+ 取得树的root节点curr. 
+ 如果curr.left == null 打印curr.val. curr = curr.right;
+ curr.left != null. pre = curr.left, 找打pre中最右的节点. 为pre.right. 将 pre.right = curr;
+ 将curr赋值为temp. 将curr = curr.left; 
+ 
+ 直到curr == null;
+ 
+ 时间复杂度 O(n)  空间复杂度 O(n)
+ 
+ ### https://leetcode-cn.com/problems/binary-tree-preorder-traversal/ 二叉树的前序遍历
+ 
+ 解题思路: 递归解法. 根左右.  时间复杂度 O(n)  空间负责度 O(logn)
+ 解题思路: 利用栈遍历. 先将root添加到栈中. 遍历stack直到为null. 弹出栈顶元素. 如果right != null 将right压入栈. 如果left!=null 将left压入栈.  先压right后left
+ 时间复杂度 O(n)  空间复杂度 O(n)  栈空间
+ 解题思路: 莫里斯遍历.  构建线索树 
+ 
+ ### https://leetcode-cn.com/problems/n-ary-tree-postorder-traversal/ N叉树的后序遍历
+ 
+ 解题思路: 递归法, 左右根. 注意避免使用全局变量的使用.  从左到右顺序依次递归树的孩子树, 最后打印根节点
+ 
+  
+ ### https://leetcode-cn.com/problems/n-ary-tree-preorder-traversal/submissions/ N叉树的前序遍历
+ 
+ 解题思路: 递归法. 根,孩子节点从左到右依次遍历
+ 
+ 
+ ### https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/ N叉树的层序遍历
+ 
+ 解题思路: 队列遍历法. 广度优先算法. 
+ 
+ 
+ ### https://leetcode-cn.com/problems/symmetric-tree/submissions/ 236 二叉树的最近公共祖先
+ 
+ 解题思路: 递归法.  
+ 
+ 边界条件: root ==null, 或者找到p或者q. 也就是root分别和他们想等.
+ 进行式 :  分别向root.left和root.right进行 如果分别能够找到p和q. 那么说明在p和q在分别左右子树上. root就是最近公共祖先. 否则一方为null, 另一方既是.
+ 
+ 时间复杂度 O(N) 因为要遍历完整个树
+ 空间复杂度 O(N) 
+ 
+ ### https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/ 105. 从前序与中序遍历序列构造二叉树
+ 
+ 解题思路: 递归法  分别构建left 和 right 子树.
+ 
+依据前序遍历, 很容易找到树的root 节点. 
+root左子树的结束就是在中序中扎到了自己. 
+root 右子树的结束就在于pre集合遍历完成. 
+
+依赖pre和in两个指针, 分别标记集合的遍历.
+
+### https://leetcode-cn.com/problems/combinations/submissions/ 77 组合
+
+解题思路: 递归法.
+例如 n=4 k=2;
+1,2,3,4. 枚举 两两组合
+
+从1开始枚举. 用列表 temp 收集枚举信息. 当temp.size() == k 的时候说明枚举完成, 
+
+
+### https://leetcode-cn.com/problems/permutations/ 46 全排列
+
+解题思路: 递归 + 回溯 + 枝剪
+
+从数组第一个元素到最后一个元素遍历. 递归枚举不通的组合. 当收集的集合中存在当期元素时. 跳过这次循环
+当没有得到解时, 删除以后一个元素. 继续递归求解. 
+当收集的数量等于数组长度时. 将解添加到res中. 
+
+### https://leetcode-cn.com/problems/permutations-ii/ 47 全排列 2
+
+解题思路: 递归 回溯 枝剪
+
+先对数组进行排序, 便于判定重复元素,  例如 [1,1,2]
+递归枚举所有排序组合, 在递归过程中去掉 已经排列过的数字. 
+
+ 
+ 
+ 
