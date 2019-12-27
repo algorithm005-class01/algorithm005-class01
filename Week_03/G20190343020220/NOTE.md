@@ -31,3 +31,9 @@
 使用hash表 做号码和字母映射. 
 
 按照层级枚举 直到level == digits.length()
+
+
+### https://leetcode-cn.com/problems/n-queens/ 51 N 皇后问题
+
+解题思路: 递归+回溯
+
