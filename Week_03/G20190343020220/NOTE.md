@@ -23,3 +23,11 @@
 解题思路: 分治法: 
 分别在前半数组找众数left和在后半部分找众数right. 当left==right时. 说明左右数组找到的结果一致. 返回left
 当left和right不等. 则遍历左右数组. 统计次数. 次数多这 胜出.
+
+### https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/ 17 电话号码的字母组合
+
+解题思路: 递归
+
+使用hash表 做号码和字母映射. 
+
+按照层级枚举 直到level == digits.length()
