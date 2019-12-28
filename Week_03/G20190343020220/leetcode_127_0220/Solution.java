@@ -8,7 +8,7 @@ import java.util.stream.Stream;
  * @author Darcy
  * @date 2019-12-28 10:50
  */
-public class Sulotion {
+public class Solution {
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
         if (wordList == null || wordList.size() == 0) {
             return 0;

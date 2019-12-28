@@ -7,7 +7,7 @@ import java.util.Map;
  * @author Darcy
  * @date 2019-12-27 14:00
  */
-public class Sulotion {
+public class Solution {
     public int majorityElement1(int[] nums) {
         return majorityHelper(nums, 0, nums.length - 1);
     }

@@ -26,7 +26,7 @@ n 是 32 位有符号整数，其数值范围是 [−231, 231 − 1] 。
  * @author Darcy
  * @date 2019-12-27 11:20
  */
-public class Sulotion {
+public class Solution {
 
     public double myPow(double x, int n) {
         int N = n;

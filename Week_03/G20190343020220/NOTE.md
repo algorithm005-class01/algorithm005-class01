@@ -250,3 +250,14 @@ public int mySqrt(int x) {
 
 
 之所以叫DFS. 在整个递归树中 依次沿着节点深入
+
+### https://leetcode-cn.com/problems/lemonade-change/ 860 柠檬水找零
+
+解题思路: 统计5元的个数.  当五元<0 说明找不开
+
+遍历数组  遇见5元的 five++ 遇见10元的 five-- ten++ 遇见20的. 要不就是five-- ten-- 要不就是 five-3
+
+如果five < 0 return false 
+
+否则 true;
+
