@@ -41,11 +41,11 @@ public class Sulotion {
         if (n == 0) {
             return 1.0;
         }
-        double half = fastPow(x, n / 2);
-        if (half % 2 == 0) {
-            return half * half;
+        double sub = this.fastPow(x, n / 2);
+        if (sub % 2 == 0) {
+            return sub * sub;
         } else {
-            return half * half * x;
+            return sub * sub * x;
         }
     }
 }

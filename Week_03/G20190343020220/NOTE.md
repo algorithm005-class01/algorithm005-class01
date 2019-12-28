@@ -1,5 +1,207 @@
 学习笔记
 
+
+
+## 第三周学习总结-代码模板及其梳理思路
+
+
+### 使用二分查找, 寻找一个半有序数组中间无序的地方
+
+```java
+class Solution {
+        /*查找最大值和最新值的位置*/
+        public int[] find(int[] nums) {
+            if (nums == null || nums.length <= 1) {
+                return new int[]{-1};
+            }
+            int lo = 0;
+            int hi = nums.length - 1;
+            int start = nums[0];
+            if (start < nums[hi]) {
+                return new int[]{-1};
+            }
+            while (lo < hi) {
+                int mid = lo + (hi - lo) / 2;
+                if (nums[mid] > nums[hi]) {
+                    lo = mid + 1;
+                } else {
+                    hi = mid;
+                }
+            }
+            return new int[]{lo - 1, lo};
+        }
+}
+```
+
+最小值位置-1 即可
+
+### 递归
+
+代码模板
+```java
+class Solution {
+public void recur(int level, int param) {
+        //terminator
+        if (level > MAX_LEVEL) {
+            return;
+        }
+        // process current logic
+
+        process(level, param);
+        //drill down
+        recur(level + 1, newParam);
+    }
+}
+```
+
+1 终止条件.  即为递归的结束条件, 
+2. 业务逻辑处理
+3. 进入下次递归
+
+例子: 22 括号生成问题
+
+```java
+class Solution {
+ public List<String> generateParenthesis(int n) {
+        List<String> res = new ArrayList<>();
+        this.generate("", res, n, 0, 0);
+        return res;
+    }
+
+    private void generate(String s, List<String> res, int level, int left, int right) {
+        // terminator
+        if (s.length() == level * 2) {
+            res.add(s);
+            return;
+        }
+        //process + drill down
+        if (left < level) {
+            generate(s + "(", res, level, left + 1, right);
+        }
+        if (right < left) {
+            generate(s + ")", res, level, left, right + 1);
+        }
+    }
+}
+```
+
+### 分治
+
+```java
+class Solution {
+public void divide_conquer(int problem, int param, int param1) {
+        // terminator 子问题结束条件
+        // perpare data 准备数据 划分子问题
+        // conquer subproblems  求解子问题
+        // process and generate the final result 合并子问题
+        // revert the current level states 处理当前层的状态
+    }
+}
+```
+
+例子 50 Pow(x,n)
+
+分治体现在将大问题分解成子问题. 求解子问题, 然后将子问题的接合并. 大问题就得到了解决. 
+
+```java
+class Solution {
+public double myPow(double x, int n) {
+        int N = n;
+        if (N < 0) {
+            x = 1 / x;
+            N = -N;
+        }
+        return fastPow(x, N);
+    }
+
+    private double fastPow(double x, int n) {
+        if (n == 0) {
+            return 1.0;
+        }
+        double sub = this.fastPow(x, n / 2);
+        if (sub % 2 == 0) {
+            return sub * sub;
+        }else {
+            return sub * sub * x;
+        }
+    }
+}
+```
+
+### 回溯
+
+回溯更像是是递归一种应用方法. 按照一条路线深入求解. 如果得不到解, 退回上一个节点, 继续试.
+
+
+例子: 78 子集问题
+
+枚举数组元素0时, 1时 2时  3时. 各种情况
+
+```java
+class Solution {
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> ans = new ArrayList<>();
+        subsetsHelper(ans, new ArrayList<>(), 0, nums);
+        return ans;
+
+    }
+
+    private void subsetsHelper(List<List<Integer>> ans, ArrayList<Integer> integers, int level, int[] nums) {
+        if (level == nums.length) {
+            ans.add(new ArrayList<>(integers));
+            return;
+        }
+        subsetsHelper(ans, integers, level + 1, nums);
+        integers.add(nums[level]);
+        subsetsHelper(ans, integers, level + 1, nums);
+        integers.remove(integers.size() - 1);
+    }
+}
+```
+
+
+### DFS
+
+```java
+class Sulotion {
+
+}
+```
+
+
+### BFS
+
+### 贪心
+
+贪心算法就是每次都选局部最优. 希望得到的结果时全局最优的.  
+
+### 二分查找
+
+
+
+例子: 69 x的平方根
+
+```java
+class Sulotion {
+public int mySqrt(int x) {
+        int left = 1, right = x;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (mid == x / mid) {
+                return mid;
+            } else if (mid < x / mid) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return right;
+    }
+
+}
+```
+
+
 ## leetcode刷题思路笔记
 
 ### https://leetcode-cn.com/problems/powx-n/ 50 Pow(x, n)
