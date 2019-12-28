@@ -268,4 +268,13 @@ public int mySqrt(int x) {
 只要今天-昨天的利润>0 就在利润profit+今天的利润. 这样得到的结果就是最大利润
 
 
+### https://leetcode-cn.com/problems/assign-cookies/ 455 分发饼干
+
+解题思路: 贪心
+
+对两个数组排序. 胃口g  饼干大小s. g<=s  孩子个数+1
+
+
+
+
 
