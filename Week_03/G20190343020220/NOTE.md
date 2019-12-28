@@ -261,3 +261,11 @@ public int mySqrt(int x) {
 
 否则 true;
 
+### https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/ 122 买卖股票的最佳时机 II
+
+解题思路 贪心  计算最大利润
+
+只要今天-昨天的利润>0 就在利润profit+今天的利润. 这样得到的结果就是最大利润
+
+
+
