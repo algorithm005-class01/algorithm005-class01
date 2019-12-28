@@ -37,3 +37,14 @@
 
 解题思路: 递归+回溯
 
+### https://leetcode-cn.com/problems/word-ladder/ 127 单词接龙
+
+解题思路: DFS
+
+将思路装换为从beginWord到endWord的路径搜索问题.  路径列表是WordList. 在WordList中搜索路径. 能够从bw->ew.
+
+由于题意. 希望可以从bw和ew端一起开始搜索. 直到会和.  将bw和ew分别放入bws和ews的不重复容器中. 遍历bws.取得单词s,将s中的字母依次替换, 检查是否在wl中存在并且在eds中也存在. 路径所搜索完成. 返回层级
+否则将单词添加到路径列表中. 继续向下搜索. 直到找到ew.  
+
+
+之所以叫DFS. 在整个递归树中 依次沿着节点深入
