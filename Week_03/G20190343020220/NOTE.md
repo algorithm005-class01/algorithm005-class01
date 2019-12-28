@@ -275,6 +275,17 @@ public int mySqrt(int x) {
 对两个数组排序. 胃口g  饼干大小s. g<=s  孩子个数+1
 
 
+### https://leetcode-cn.com/problems/search-a-2d-matrix/ 74. 搜索二维矩阵
+
+解题思路: 二分查找
+
+一个m*n二维有序矩阵 可以转成从0开始到m*n-1 的数组. 
+
+所以 left = 0 right = m*n-1;
+
+``row = idx / n ， col = idx % n``
+
+
 
 
 
