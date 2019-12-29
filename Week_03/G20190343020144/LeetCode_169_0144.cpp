@@ -36,77 +36,88 @@ class SolutionSort
 public:
     int majorityElement(vector<int> &nums)
     {
-        sort(nums.begin(),nums.end());
+        sort(nums.begin(), nums.end());
         int middle = nums.size() / 2;
         return nums[middle];
     }
 };
 
-class SolutionDiverConquer
+class SolutionDivideConquer
 {
 public:
     int majorityElement(vector<int> &nums)
     {
-        if (nums.size() == 1) return nums[0];
-        return majorityElement(nums,0, nums.size() - 1);
+        if (nums.size() == 1)
+            return nums[0];
+        return majorityElement(nums, 0, nums.size() - 1);
     }
 
     int majorityElement(vector<int> &nums, int lo, int hi)
     {
-        if (lo == hi) return nums[lo];
+        if (lo == hi)
+            return nums[lo];
         // 子问题
         int middle = (hi - lo) / 2 + lo;
-        int left = majorityElement (nums,lo,middle);
-        int right = majorityElement (nums,middle + 1,hi);
-        if (left == right) return left;
+        int left = majorityElement(nums, lo, middle);
+        int right = majorityElement(nums, middle + 1, hi);
+        if (left == right)
+            return left;
         // 统计次数
-        int leftValueCount = countMajorElement (nums,lo,middle,left);
-        int rightValueCount = countMajorElement (nums,middle + 1,hi,right);
+        int leftValueCount = countMajorElement(nums, lo, middle, left);
+        int rightValueCount = countMajorElement(nums, middle + 1, hi, right);
         return leftValueCount > rightValueCount ? left : right;
     }
 
-    int countMajorElement(vector<int> &nums, int lo, int hi, int value) {
+    int countMajorElement(vector<int> &nums, int lo, int hi, int value)
+    {
         int ret = 0;
-        while (lo <= hi){
-            if(nums[lo++] == value) ret++;
+        while (lo <= hi)
+        {
+            if (nums[lo++] == value)
+                ret++;
         }
         return ret;
     }
 };
 
-
 /**
  * 类似与 同归于尽的做法, 最后剩下的一定是众数
  * 
 */
-class SolutionBoyerMoore {
+class SolutionBoyerMoore
+{
 public:
     int majorityElement(vector<int> &nums)
     {
         int maj = nums[0];
         int count = 1;
-        for (auto num: nums) {
-            if (count == 0) {
+        for (auto num : nums)
+        {
+            if (count == 0)
+            {
                 maj = num;
-            } 
+            }
             count += (maj == num ? 1 : -1);
         }
         return maj;
     }
 };
 
-
-class SolutionHash {
+class SolutionHash
+{
 public:
     int majorityElement(vector<int> &nums)
     {
-        map<int,int> m;
-        for (auto v: nums){
+        map<int, int> m;
+        for (auto v : nums)
+        {
             m[v]++;
         }
         int value = 0;
-        for (auto kv: m){
-            if (kv.second > nums.size()/2) {
+        for (auto kv : m)
+        {
+            if (kv.second > nums.size() / 2)
+            {
                 value = kv.first;
             }
         }
