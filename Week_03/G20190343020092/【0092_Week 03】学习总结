@@ -1,0 +1,104 @@
+本周四大主题：
+1.分治和回溯
+2.BFS和DFS
+3.贪心算法
+4.二分查找
+
+1.分治和回溯：
+1.1基本概念：
+回溯是一种典型的算法，常见三步走：a.将一个大问题分解为若干同类子问题；b.递归地解这些小问题;c.将这些小问题的答案合并。
+
+1.2经典的分治算法应用场景：
+a.binary search;b.quickSort;c.mergeSort
+
+1.3分治的代码模板：
+分治代码模板
+def divide_conquer(problem, param1, param2, ...): 
+  # recursion terminator 递归终止条件
+  if problem is None: 
+	print_result 
+	return 
+
+  # prepare data 预处理数据，比如二分查找时，先将数组排序
+  data = prepare_data(problem) 
+  subproblems = split_problem(problem, data) 
+
+  # conquer subproblems 处理子问题
+  subresult1 = self.divide_conquer(subproblems[0], p1, ...) 
+  subresult2 = self.divide_conquer(subproblems[1], p1, ...) 
+  subresult3 = self.divide_conquer(subproblems[2], p1, ...) 
+  …
+
+  # process and generate the final result 合并子问题的解，生成结果
+  result = process_result(subresult1, subresult2, subresult3, …)
+	
+  # revert the current level states 返回当前层的状态？不太理解这里
+
+1.4分治和动态规划的区别：
+两者都是将一个问题划分成若干子问题并递归解决。主要区别在于，分治适用于每个子问题只处理一次的场景，对于动态规划，一个子问题可能需要处理多次，因此会使用数组
+或者字典等存储结构存储子问题的解，避免重复计算。
+
+1.5回溯：
+将问题分解为若干子问题，将子问题的解增量合并后，形成最终解，在合并过程中，实时判断是否满足约束条件，对于不满足的解法，及时剔除并回溯到上一个子问题。
+
+1.6回溯典型场景：
+数独
+
+2.BFS和DFS，是树/图的两种遍历方式
+这里需要注意树和图的区别，因为图可能是有环的，因此需要维护一个visited_array来存储访问过的图节点
+2.1 dfs代码模板：
+
+visited = set() #其实这里用set存的话，可能比较浪费空间，要存node.val和node.next，如果node.val不重复，可以用下面这种方式
+visited = [False] * lenth 
+
+def dfs(node, visited):
+    if node in visited: # terminator
+    	# already visited 
+    	return 
+    #if visited[node.val] == True:
+       # already visited
+       #return
+
+	visited.add(node) 
+  #visited[node.val] = True
+	# process current node here. 
+	...
+	for next_node in node.children(): 
+		#同理这里也可以修改
+    if next_node not in visited: 
+			dfs(next_node, visited)
+
+2.2 bfs代码模板
+def BFS(graph, start, end):
+    visited = set()
+	queue = [] 
+	queue.append([start]) 
+  
+	while queue: 
+		node = queue.pop() 
+		visited.add(node)
+    #拿到某个节点的所有子节点并处理
+		process(node) 
+		nodes = generate_related_nodes(node) 
+		queue.push(nodes)
+
+	# other processing work 
+	...
+
+3.贪心算法
+跟分治、回溯、动态规划类似，贪心算法也是一种build up a solution piece by piece的算法，区别在于，贪心算法在每一步，选取的都是当前最优解。
+3.1贪心算法典型场景：部分背包问题。（背包问题分两种，0-1背包问题和部分背包问题，0-1背包问题指的是对于某样东西，你只能选择带或者不带。部分背包问题指的是
+对于某样东西，你可以选择全部带，或者只带其中一部分（可以切一部分），或者不带）
+
+4.二分查找
+4.1比较经典的查找算法，需要牢记模板
+left, right = 0, len(array) - 1 
+while left <= right: 
+	  mid = (left + right) / 2 
+	  if array[mid] == target: 
+		    # find the target!! 
+		    break or return result 
+	  elif array[mid] < target: 
+		    left = mid + 1 
+	  else: 
+		    right = mid - 1
