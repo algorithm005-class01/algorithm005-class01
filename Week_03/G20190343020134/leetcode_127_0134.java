@@ -50,9 +50,9 @@ public class WorkLadder127 {
     private static int minChangeNum = 0;
 
     public static void main(String[] args) {
-        String beginWord = "a";
-        String endWord = "c";
-        List<String> wordList = Arrays.asList("a", "b", "c");
+        String beginWord = "hit";
+        String endWord = "cog";
+        List<String> wordList = Arrays.asList("hot","dot","dog","lot","log","cog");
         System.out.println(ladderLength(beginWord, endWord, wordList));
 
     }
@@ -71,9 +71,9 @@ public class WorkLadder127 {
         //如果转换成功，则直接返回转换次数
         if (beginWord.equals(endWord)) {
             if (minChangeNum == 0) {
-                minChangeNum = changeNum;
+                minChangeNum = changeNum + 1;
             } else {
-                minChangeNum = Math.min(minChangeNum, changeNum);
+                minChangeNum = Math.min(minChangeNum, changeNum + 1);
             }
             return;
         }
@@ -100,6 +100,7 @@ public class WorkLadder127 {
             if (diffNum == 1) {
                 visited[k] = true;
                 dfs_helper(word, endWord, wordList, changeNum + 1, visited);
+                visited[k] = false;
             }
         }
     }
