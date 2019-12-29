@@ -1,0 +1,27 @@
+class Solution {
+    public void rotate(int[] nums, int k) {
+        k = k % nums.length;
+        if (nums == null || nums.length == 0 || k <= 0) {
+            return;
+        }
+        int mink = k <= (nums.length - k) ? k : (nums.length - k);
+        if (nums.length % mink != 0) {
+            recursionSwap(nums, k, 0, nums[0], nums.length);
+        } else {
+            for (int i = 0; i < mink; i++) {
+                recursionSwap(nums, k, i, nums[i], nums.length / mink);
+            }
+        }
+    }
+
+    public void recursionSwap(int[] nums, int k, int index, int targetItem, int recusionTimes) {
+        int newIndex = (index + k) % nums.length;
+        int temp = nums[newIndex];
+        nums[newIndex] = targetItem;
+        recusionTimes--;
+        if (recusionTimes == 0) {
+            return;
+        }
+        recursionSwap(nums, k, newIndex, temp, recusionTimes);
+    }
+}
