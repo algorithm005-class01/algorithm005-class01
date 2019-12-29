@@ -18,3 +18,26 @@
 2. 存在上限界
 3. 能够通过索引访问
 需要能够写出二分查找的代码模板
+
+# 第11课课后作业
+使用二分查找，寻找一个半有序数组[4, 5, 6, 7, 0, 1, 2]中间无序的地方
+解答：其实就是查找半有序数组的最小值，如果最小值不在位置0，那最大值一定在最小值的左边一个位置，也就是无序的地方
+```java
+public int findMin(int[] nums) {
+    if (nums.length == 1){
+        return nums[0];
+    }
+    int low = 0, high = nums.length - 1;
+    while (low <= high){
+        int mid = low + ((high - low) >> 1);
+        if ((mid == 0 && nums[mid] < nums[nums.length - 1]) || (mid > 0 && nums[mid] < nums[mid - 1])){
+            return nums[mid];
+        } else if (nums[mid] > nums[nums.length - 1]){
+            low = mid + 1;
+        } else{
+            high = mid - 1;
+        }
+    }
+    return nums[0];
+}
+```
