@@ -1,0 +1,24 @@
+class Solution {
+    public List<Integer> postorder(Node root) {
+        List<Integer> results = new ArrayList<>();
+        if(root == null){
+            return results;
+        }
+        addchildren(results,root);
+        results.add(root.val);
+        return results;
+    }
+
+    void addchildren(List<Integer> list,Node root){
+      if(root ==null || root.children == null || root.children.size() <= 0){
+          return;
+      }
+      for (Node child: root.children) {
+          if(child == null){
+              continue;
+          }
+          addchildren(list,child);
+          list.add(child.val);
+      }
+    }
+}

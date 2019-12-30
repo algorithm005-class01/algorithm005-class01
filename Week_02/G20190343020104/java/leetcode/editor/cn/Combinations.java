@@ -22,6 +22,8 @@ import java.util.List;
 public class Combinations {
     public static void main(String[] args) {
         Solution solution = new Combinations().new Solution();
+        List<List<Integer>> combine = solution.combine(4, 2);
+        System.out.println(combine);
     }
 
 
@@ -34,6 +36,7 @@ public class Combinations {
         public void backtrack(int first, LinkedList<Integer> curr) {
             // if the combination is done
             if (curr.size() == k)
+
                 output.add(new LinkedList(curr));
 
             for (int i = first; i < n + 1; ++i) {
@@ -41,7 +44,7 @@ public class Combinations {
                 curr.add(i);
                 // use next integers to complete the combination
                 backtrack(i + 1, curr);
-                // backtrack
+                // backtrack 为啥这里就可以回溯
                 curr.removeLast();
             }
         }

@@ -1,86 +1,113 @@
-## 学到什么
+## 本周学到什么？
 
-###  Hash表
-哈希表，是根据关键码值(Key value)而直接进行访问的数据结构。
-它可以加快查找速度，因为它把关键码值映射到表中一个位置来访问记录。
-这个映射函数叫作散列函数，存放记录的数组叫作哈希表
+### 分治法
+分治就是一种特殊的递归，与递归的不同就是最后的分治是需要把子结果组合
 
-#### 时间复杂度
-查找 O(1)
-插入 O(1)
-删除 O(1)
+分治代码的模板:
+```
+def divide_conquer(problem, param1, param2, ...):
+    # recurtion terminator      
+    if problem is None:
+        print_result
+        return
+    # prepare data
+    data = prepare_data(problem)
+    subproblems = split_problem(problem, data)
+    # conquer subproblems
+    subresult1 = self.divide_conquer(subproblems[0], p1, ...)
+    subresult2 = self.divide_conquer(subproblems[1], p1, ...)
+    subresult3 = self.divide_conquer(subproblems[2], p1, ...)
+    ...
+    # process and generate the final result
+    result = process_result(subresult1, subresult2, subresult3, ...)
+```
 
-#### js中的结构
-就是es6中map和set
+### 回溯
+回溯也是一种特殊的递归，其实回溯的思想就是在解决问题的过程中如果发现现有的分步答案不能得到有效正确的解答的时候，将取消上一步甚至是上几步的运算，然后再重新尝试寻找问题的答案
 
-##### Set
-Set 类似于数组,但数组可以允许元素重复,Set 不允许元素重复
-Set 实例的属性和方法有
-1.size :获取元素数量。
-2.add(value) :添加元素,返回 Set 实例本身。
-3.delete(value) :删除元素,返回一个布尔值,表示删除是否成功。
-4.has(value) :返回一个布尔值,表示该值是否是 Set 实例的元素。
-5.clear() :清除所有元素,没有返回值
+回溯会出现的两种情况:
+* 找到一个可能存在的正确答案
+* 在尝试了所有可能的分步方法后宣告该问题没有答案
 
-Set 实例的遍历,可使用如下方法1.keys() :返回键名的遍历器。
-2.values() :返回键值的遍历器。不过由于 Set 结构没有键名,只有键值(或者说键名和键值是同一个值),所以 keys() 和 values() 返回结果一致。
-3.entries() :返回键值对的遍历器。
-4.forEach() :使用回调函数遍历每个成员
+## 深度优先与广度优先遍历
+### 二叉树的数据结构
+```
+class TreeNode:
+    def __init__(self, val):
+        self.val = val
+        self.left, self.right = None, None
+```
 
-##### Map
-Map 的用法和普通对象基本一致，先看一下它能用非字符串或者数字作为 key 的特性。
+### 遍历的定义:
+* 每个节点都要访问一次
+* 每个节点仅仅要访问一次
+* 对于节点的访问顺序不限
+- 深度优先: depth first search
+- 广度优先: breadth first search
 
-Map 实例的属性和方法如下：
+循环的方式如图:
+![image](https://user-images.githubusercontent.com/12718716/71552142-b06e3c80-2a31-11ea-95c1-59d129c56380.png)
+### 深度优先示例代码（递归写法）
+```
+visited = set()
+def dfs(node, visited):
+    if node in visited: # terminator
+        # already visited   
+        return
+    visited.add(node)
+    # process current node herre
+    ...
+    for next_node in node.children():
+        if not next_node in visited:
+            dfs(next_node, visited)
+```
+### 广度优先示例代码
+```
+def BFS(graph, start, end):
+    queue = []
+    queue.append([start])
+    visited.add(start)
 
-size：获取成员的数量
-set：设置成员 key 和 value
-get：获取成员属性值
-has：判断成员是否存在
-delete：删除成员
-clear：清空所有
+    while queue:
+        node = queue.pop()
+        visited.add(node)
 
-Map 实例的遍历方法有：
+        process(node)
+        nodes = generate_related_nodes(node)
+        queue.push(nodes)
+    
+    # other processing work
+```
 
-keys()：返回键名的遍历器。
-values()：返回键值的遍历器。
-entries()：返回所有成员的遍历器。
-forEach()：遍历 Map 的所有成员。
+##  贪心算法
 
-### 树
-linked list 是特殊化的tree
-tree 是特殊化的图
-#### 二叉树
-就是父节点只有两个子节点
-##### 二叉树遍历
-前序遍历：根结点 ---> 左子树 ---> 右子树
-中序遍历：左子树---> 根结点 ---> 右子树
-后序遍历：左子树 ---> 右子树 ---> 根结点
+### 定义
+就是每一步选择中都采取在当前状态下最好或最优的选择，从而导致结果是全局最好或最优的算法。贪心算法与动态规划的区别就是动态规划有回退的功能。
 
-#### 二叉搜索树
-1. 左子树上所有结点的值均小于它的根结点的值
-2. 右子树上所有结点的值均大于它的根结点的值
-3. 以此类推: 左右子树也分别为二叉查找树
-### 图
-树和图的差别就是有没有环
-### 递归
-递归就是函数循环调用自己
-#### 思维要点
-1、不要人肉进行递归(最大的误区)
-2、找到最近最简方法,将其拆解成可重复的问题(重复子问题)
-3、数学归纳法思维
-#### 递归代码模板
-1.  递归终结条件
-2. 处理当前逻辑层
-3. 下探到下一层
-4. 清理当前层
-## 思维
-### 面试做题四步
-1. clarification
-2. possible solutions ---> optimal(time & space)
-3. code
-4. test cases
+### 适用贪心算法的场景
+问题可以分解成子问题来解决，子问题的最优解能递推到最终问题的最优解。这种子问题最优解称为最优解子结构。
 
-## 总结
-这周周一到周五进度没太推进，主要都放在了周六日
-这周做题主要是做了二叉树的遍历，结合流程图想了挺多时间。
-下周可能要参考一下别的资料
+## 二分查找
+找边界，划分去查找
+
+### 二分查找的前提
+1. 目标函数单调性 (单调递增或者递减)
+2. 存在上下界 (bouned)
+3. 能够通过索引访问 (index accessible)
+
+### 代码模板
+
+left， right= 0， len(array)-1
+while left <= right:
+ mid = (left + right)/2
+ if array[mid] == target:
+    # find the target!!
+    break or return result 
+ elif array[mid] < target:
+    left = mid + 1
+ else： 
+    right= mid - 1 
+
+## 心得体会
+说实话从这周开始，感觉讲的东西有点难度了已经，一些地方已经看不懂了，下一周是考试周，需要一些时间看一下别的材料去理解这些知识
+
