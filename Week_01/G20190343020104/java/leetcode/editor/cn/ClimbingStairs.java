@@ -51,19 +51,22 @@ public class ClimbingStairs {
          *
          * @param i 起始台阶
          * @param n 台阶数
-         * @param ns
+         * @param ns 保存中间结果的数组。
          * @return
          */
         public int climb_Stairs(int i, int n, int[] ns) {
             if (i > n) {
                 return 0;
             }
+            //i==n表示楼梯树和起始数一致。比如i=1,n=1时，就只有一种走法。
             if (i == n) {
                 return 1;
             }
             if (ns[i] > 0) {
+                //如果已经计算过了，就返回
                 return ns[i];
             }
+            //递归计算向上爬1阶和2阶需要的次数。
             ns[i] = climb_Stairs(i + 1, n, ns) + climb_Stairs(i + 2, n, ns);
             return ns[i];
 
