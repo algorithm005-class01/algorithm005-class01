@@ -26,31 +26,22 @@ public class CoinChange {
     }
 
 
-    //leetcode submit region begin(Prohibit modification and deletion)
+    //leetcode submit region begin(Prohibit modificat ion and deletion)
     class Solution {
 
-        //暴力法，要看到树分解的图才能想出来
+        //dp。amount相当于台阶总数。coins相当于每次可走的台阶数。这样就
+        //dp方程 f(n) = min(f(n-k) for (k in a)) + 1
         public int coinChange(int[] coins, int amount) {
 
-            // 由于硬币是整数，因此组成0的方法为0
-            if (amount == 0) {
-                return 0;
-            }
-            int result = -1;
-            //暴力递归。
-            for (int coin : coins) {
-                if (coin > amount) {
-                    continue;
+            int[] dp = new int[amount + 1];
+            for (int i = 0; i < amount; i++) {
+                for (int coin : coins) {
+                    if (coin <= i) {
+                        dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+                    }
                 }
-                int sub = coinChange(coins, amount - coin);
-                if (sub == -1) {
-                    //如果此数无解，则计算下一个树
-                    continue;
-                }
-                result = result == -1 ? sub : Integer.min(sub, result);
             }
-
-            return result != -1 ? result + 1 : -1;
+            return dp[amount] > amount ? -1 : dp[amount];
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
