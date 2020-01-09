@@ -19,6 +19,8 @@
 
 package leetcode.editor.cn;
 
+import java.util.Arrays;
+
 public class CoinChange {
     public static void main(String[] args) {
         Solution solution = new CoinChange().new Solution();
@@ -34,8 +36,11 @@ public class CoinChange {
         public int coinChange(int[] coins, int amount) {
 
             int[] dp = new int[amount + 1];
-            for (int i = 0; i < amount; i++) {
+            Arrays.fill(dp, amount + 1);
+            dp[0] = 0;
+            for (int i = 1; i <= amount; i++) {
                 for (int coin : coins) {
+                    //如果硬币面值大于i，则没有解法，小于等于i，则至少有一种解法
                     if (coin <= i) {
                         dp[i] = Math.min(dp[i], dp[i - coin] + 1);
                     }
