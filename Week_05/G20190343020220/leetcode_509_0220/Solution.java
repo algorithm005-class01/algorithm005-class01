@@ -17,4 +17,16 @@ public class Solution {
         }
         return a[n];
     }
+
+    public int fib2(int n) {
+        int prev = 0;
+        int prev1 = 1;
+        while (n > 1) {
+            int sum = prev + prev1;
+            prev = prev1;
+            prev1 = sum;
+            n--;
+        }
+        return prev1;
+    }
 }

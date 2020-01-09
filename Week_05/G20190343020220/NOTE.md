@@ -20,6 +20,13 @@
 2. 状态空间 dp(i)  表示i的斐波那契数.
 3. n的斐波那契数就是 dp(n)
 
+解题2:
+
+通过dp公式 a[i] = a[i - 1] + a[i - 2];  发现 i的值 只和 a-1和a-2相关
+
+所以通过2个int值保存 a-1 和 a-2;
+一次循环就可以得到结果
+
 ### https://leetcode-cn.com/problems/unique-paths/ 62. 不同路径
 
 1. 分治. m*n的路径问题. f(m,n) = f(m-1,n)+f(m,n-1);
