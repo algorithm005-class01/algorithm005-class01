@@ -19,3 +19,9 @@
 1. 分治  f(i) = f(i-1) + f(i-2)
 2. 状态空间 dp(i)  表示i的斐波那契数.
 3. n的斐波那契数就是 dp(n)
+
+### https://leetcode-cn.com/problems/unique-paths/ 62. 不同路径
+
+1. 分治. m*n的路径问题. f(m,n) = f(m-1,n)+f(m,n-1);
+2. 状态空间  dp[m][n] 表示m*n的路径和.
+3. 解决问题  dp[m][n] = dp[m-1][n]+ dp[m][n-1];
