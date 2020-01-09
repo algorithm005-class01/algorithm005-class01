@@ -1,5 +1,7 @@
 package Week_05.G20190343020220.leetcode_62_0220;
 
+import java.util.Arrays;
+
 /**
  * @author Darcy
  * @date 2020-01-09 19:01
@@ -20,5 +22,16 @@ public class Solution {
         }
 
         return dp[m - 1][n - 1];
+    }
+
+    public int uniquePaths1(int m, int n) {
+        int[] a = new int[n];
+        Arrays.fill(a, 1);
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                a[j] += a[j - 1];
+            }
+        }
+        return a[n - 1];
     }
 }
