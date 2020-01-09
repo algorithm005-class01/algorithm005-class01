@@ -38,3 +38,11 @@
 
 没弄太明白
 
+### https://leetcode-cn.com/problems/unique-paths-ii/ 63. 不同路径 II
+
+和不同路径1 是一个思路. 但是状态转移方程要添加条件限制. 当==1 的时候. 路径是0  否则才是dp[m][n] = dp[m-1][n]+ dp[m][n-1];
+
+路径压缩也是一样的思路: 当[n] == 1 的时候. dp[n] = 0;
+
+### https://leetcode-cn.com/problems/longest-common-subsequence/ 1143. 最长公共子序列
+
