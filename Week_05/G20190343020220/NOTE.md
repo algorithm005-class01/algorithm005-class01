@@ -46,3 +46,10 @@
 
 ### https://leetcode-cn.com/problems/longest-common-subsequence/ 1143. 最长公共子序列
 
+分治. 将text1和text2最长公共子序列的问题, 转换为text1[0-i]和text2[0-j]的最长公共子序列问题
+  
+状态空间 text1 长度m 和 text2 长度n 分别组成横坐标和竖坐标. 构成2唯数组 dp[][]  dp[i][j] = text1[0-i]和text[0-j]的最长公共子序列
+
+解决问题 当text1[i-1] == text2[j-1] ? dp[i][j] = dp[i-1][j-1] +1 : dp[i][j] = Math.max(dp[i-1][j] , dp[i][j-1]);
+
+
