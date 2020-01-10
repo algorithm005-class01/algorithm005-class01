@@ -25,29 +25,30 @@ package leetcode.editor.cn;
 public class HouseRobber {
     public static void main(String[] args) {
         Solution solution = new HouseRobber().new Solution();
-        System.out.println(solution.rob(new int[]{2, 1, 1, 2}));
+        System.out.println(solution.rob(new int[]{1, 1}));
     }
 
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int rob(int[] nums) {
-            //暴力
-            int max = 0;
-            for (int i = 0; i < nums.length; i++) {
-                int sum = nums[i];
-                int t = 0;
-                for (int j = i + 2; j < nums.length; j++) {
-                    if (j == t + 1) {
-                        continue;
-                    }
-                    sum += nums[j];
-                    max = Math.max(sum + nums[j], max);
-                    t = j;
-                }
-
+            if (nums == null || nums.length == 0) {
+                return 0;
+            }
+            if (nums.length == 1) {
+                return nums[0];
+            }
+            int n = nums.length;
+            int[] a = new int[n];
+            a[0] = nums[0];
+            a[1] = Math.max(nums[0], nums[1]);
+            int max = a[1];
+            for (int i = 2; i < n; i++) {
+                a[i] = Math.max(a[i - 1], a[i - 2] + nums[i]);
+                max = Math.max(a[i], max);
             }
             return max;
+
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
