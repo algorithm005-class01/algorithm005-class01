@@ -24,8 +24,7 @@
 
 package leetcode.editor.cn;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
 
 public class TaskScheduler {
     public static void main(String[] args) {
@@ -37,32 +36,32 @@ public class TaskScheduler {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int leastInterval(char[] tasks, int n) {
-            //暴力
-            int i = 0;
-            char c = 0;
-            int count = 0;
-            int t = 0;
-            Map<Character, Integer> map = new HashMap<>();
-            while (count != tasks.length) {
-                Integer lastTaskTime = map.getOrDefault(tasks[i], 0);
-
-                if ((lastTaskTime == 0 || t <= n || t - lastTaskTime >= n)
-                        && tasks[i] != c) {
-                    System.out.print(tasks[i] + " -> ");
-                    count++;
-                    c = tasks[i];
-                    map.put(tasks[i], t);
-                    i++;
-                } else {
-                    i++;
-                    if (i >= tasks.length) {
-                        i = 0;
-                    }
-                    System.out.print("待命 -> ");
-                }
-                t++;
+            //排序，官方解法。先将任务按数量排序，数量多的在时间冷却时间到时优先安排。贪心算法。
+            int[] map = new int[26];
+            for (char c : tasks) {
+                map[c - 'A']++;
             }
-            return t;
+            //数量多的在map末尾
+            Arrays.sort(map);
+            int time = 0;
+            //当任务数量最多的执行完毕后，认为全部执行完毕。
+            while (map[25] > 0) {
+                int i = 0;
+                while (i <= n) {
+                    //在冷却时间内拿出任务数最多的来执行。
+                    if (map[25] == 0) {
+                        break;
+                    }
+                    //从数组末尾开始执行。
+                    if (i < 26 && map[25 - i] > 0) {
+                        map[25 - i]--;
+                    }
+                    time++;
+                    i++;
+                }
+                Arrays.sort(map);
+            }
+            return time;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
