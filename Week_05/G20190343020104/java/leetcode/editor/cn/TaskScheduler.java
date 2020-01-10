@@ -24,10 +24,13 @@
 
 package leetcode.editor.cn;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class TaskScheduler {
     public static void main(String[] args) {
         Solution solution = new TaskScheduler().new Solution();
-        System.out.println(solution.leastInterval(new char[]{'A', 'A', 'A', 'B', 'B', 'B' }, 3));
+        System.out.println(solution.leastInterval(new char[]{'A', 'A', 'A', 'B', 'B', 'B' }, 2));
     }
 
 
@@ -35,27 +38,29 @@ public class TaskScheduler {
     class Solution {
         public int leastInterval(char[] tasks, int n) {
             //暴力
-            int time = 0;
+            int i = 0;
             char c = 0;
             int count = 0;
             int t = 0;
+            Map<Character, Integer> map = new HashMap<>();
             while (count != tasks.length) {
-                t++;
+                Integer lastTaskTime = map.getOrDefault(tasks[i], 0);
 
-                if (tasks[time] != c) {
-                    System.out.print(tasks[time] + " -> ");
+                if ((lastTaskTime == 0 || t <= n || t - lastTaskTime >= n)
+                        && tasks[i] != c) {
+                    System.out.print(tasks[i] + " -> ");
                     count++;
-                    c = tasks[time];
-                }
-
-
-                if (time >= tasks.length) {
-                    time = 0;
-                    System.out.print("待命 -> ");
+                    c = tasks[i];
+                    map.put(tasks[i], t);
+                    i++;
                 } else {
-
-                    time += n;
+                    i++;
+                    if (i >= tasks.length) {
+                        i = 0;
+                    }
+                    System.out.print("待命 -> ");
                 }
+                t++;
             }
             return t;
         }
