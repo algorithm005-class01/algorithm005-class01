@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ScappleDocument Version="1.1" ID="CD442CF4-8079-42F7-A92A-726B6DC31E00">
+    <Notes>
+        <Note ID="0" FontSize="12.0" Position="448.0,125.0" Width="58.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+                <Border Weight="3"></Border>
+            </Appearance>
+            <String>贪心算法</String>
+            <ConnectedNoteIDs>1</ConnectedNoteIDs>
+        </Note>
+        <Note ID="1" FontSize="12.0" Position="541.0,125.0" Width="200.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+                <Border Weight="1"></Border>
+            </Appearance>
+            <String>定义：贪心算法是一种砸你每一步选择中都采取在当前状态下最好或最优（即最有利）的选择，从而希望导致结果是全局最好或最优的算法</String>
+            <ConnectedNoteIDs>0, 2, 4</ConnectedNoteIDs>
+        </Note>
+        <Note ID="2" FontSize="12.0" Position="776.0,125.0" Width="200.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+                <Border Weight="1"></Border>
+            </Appearance>
+            <String>贪心算法与动态规划的不同在于它对每个子问题的解决方案都做出选择，不能回退。动态规划则会保存以前的运算结果，并根据以前的结果对当前进行选择，有回退功能。</String>
+            <ConnectedNoteIDs>1, 3</ConnectedNoteIDs>
+        </Note>
+        <Note ID="3" FontSize="12.0" Position="1011.0,125.0" Width="156.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+                <TextColor>0.956863 0.160784 0.305882</TextColor>
+                <Border Weight="1"></Border>
+            </Appearance>
+            <String>贪心：当下做局部最优判断
+回溯：能够回退
+动规：最优判断+回退</String>
+            <ConnectedNoteIDs>2</ConnectedNoteIDs>
+        </Note>
+        <Note ID="4" FontSize="12.0" Position="541.0,253.0" Width="200.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+                <Border Weight="1"></Border>
+            </Appearance>
+            <String>应用：可解决最优化问题，如图中的最小生成树。但对于工程和生活中的问题，一般不能得到答案。</String>
+            <ConnectedNoteIDs>1, 5</ConnectedNoteIDs>
+        </Note>
+        <Note ID="5" FontSize="12.0" Position="777.0,271.0" Width="231.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+                <Border Weight="1"></Border>
+            </Appearance>
+            <String>面试中很难遇到/给出标准代码模板即可</String>
+            <ConnectedNoteIDs>4</ConnectedNoteIDs>
+        </Note>
+    </Notes>
+    <BackgroundShapes></BackgroundShapes>
+    <NoteStyles>
+        <Style Name="Bubble (Blue)" ID="6AB22EF3-4E0B-4762-8AFD-7EED81FDCF26" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="No" AffectNoteBody="Yes" AffectFade="No">
+            <BorderThickness>1</BorderThickness>
+            <BorderColor>0.561855 0.71062 0.779401</BorderColor>
+            <FillColor>0.702319 0.888276 0.974252</FillColor>
+        </Style>
+        <Style Name="Bubble (Green)" ID="9F5604FA-27B1-462E-BFAE-91E31E49C641" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="No" AffectNoteBody="Yes" AffectFade="No">
+            <BorderThickness>1</BorderThickness>
+            <BorderColor>0.572684 0.758969 0.558154</BorderColor>
+            <FillColor>0.715855 0.948712 0.697692</FillColor>
+        </Style>
+        <Style Name="Bubble (Pink)" ID="BA8BBD68-5AED-4CA0-BA77-BAE811833891" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="No" AffectNoteBody="Yes" AffectFade="No">
+            <BorderThickness>1</BorderThickness>
+            <BorderColor>0.794796 0.560965 0.58607</BorderColor>
+            <FillColor>0.957566 0.766747 0.999616</FillColor>
+        </Style>
+        <Style Name="Bubble (Red)" ID="7852BCB1-D751-4B08-8D95-5A7FF472CAFA" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="No" AffectNoteBody="Yes" AffectFade="No">
+            <BorderThickness>1</BorderThickness>
+            <BorderColor>0.794796 0.560965 0.58607</BorderColor>
+            <FillColor>0.993495 0.701207 0.732587</FillColor>
+        </Style>
+        <Style Name="Bubble (Yellow)" ID="D7F6B141-C5C3-4580-9480-629AEF947F29" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="No" AffectNoteBody="Yes" AffectFade="No">
+            <BorderThickness>1</BorderThickness>
+            <BorderColor>0.798177 0.714184 0.522055</BorderColor>
+            <FillColor>0.997722 0.89273 0.652569</FillColor>
+        </Style>
+        <Style Name="Red Text" ID="D90696CA-2B69-415D-940C-EEB3CA707ED8" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="Yes" AffectNoteBody="No" AffectFade="No">
+            <TextColor>0.985948 0.0 0.026951</TextColor>
+        </Style>
+        <Style Name="Title Text" ID="62829660-172C-461F-92F3-8ED7F6091897" AffectFontStyle="Yes" AffectAlignment="Yes" AffectTextColor="No" AffectNoteBody="No" AffectFade="No">
+            <FontSize>28.0</FontSize>
+            <IsBold>Yes</IsBold>
+        </Style>
+    </NoteStyles>
+    <UISettings>
+        <BackgroundColor>0.999767 0.98837 0.949907</BackgroundColor>
+        <DefaultFont>Helvetica</DefaultFont>
+    </UISettings>
+    <PrintSettings PaperSize="595.0,842.0" LeftMargin="72.0" RightMargin="72.0" TopMargin="90.0" BottomMargin="90.0" PaperType="iso-a4" Orientation="Portrait" HorizontalPagination="Clip" VerticalPagination="Auto" ScaleFactor="1.0" HorizontallyCentered="Yes" VerticallyCentered="Yes" Collates="Yes" PagesAcross="1" PagesDown="1"></PrintSettings>
+</ScappleDocument>
