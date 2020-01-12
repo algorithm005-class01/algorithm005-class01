@@ -1,0 +1,83 @@
+package week005;
+
+/*
+ * 给定一个包含非负整数的 m x n 网格，请找出一条从左上角到右下角的路径，使得路径上的数字总和为最小。
+
+说明：每次只能向下或者向右移动一步。
+
+示例:
+
+输入:
+[
+  [1,3,1],
+  [1,5,1],
+  [4,2,1]
+]
+输出: 7
+解释: 因为路径 1→3→1→1→1 的总和最小。
+ * */
+public class Leetcode_51_0182 {
+	
+    //  暴力递归， 超时， 加缓存为啥不行？
+	public int minPathSum2(int[][] grid) {
+    	if (grid == null) {
+    		return 0;
+    	}
+    	int[][] mem = new int[grid.length][grid[0].length];
+    	for (int i = 0; i < mem.length; i++) {
+    		for (int j = 0; j < mem.length; j++) {
+    			mem[i][j] = Integer.MAX_VALUE;
+    		}
+    	}
+        return helper(grid, 0, 0, mem);
+    }
+
+    public int helper(int[][] grid, int i, int j, int[][] mem){
+        if ((i == grid.length) || (j == grid[0].length)) {
+            return Integer.MAX_VALUE;
+        }
+        if ((i == grid.length - 1) && (j == grid[0].length -1)) {
+            return grid[i][j];
+        }
+        
+        if (mem[i][j] == Integer.MAX_VALUE) {
+            mem[i][j] =  grid[i][j] + Math.min(helper(grid, i + 1, j, mem), helper(grid, i, j + 1, mem));
+        }
+        
+        return mem[i][j];
+    }
+    
+    // 子问题
+    // problem = subproblemA + subproblemB
+    // 状态定义
+    // dp[i][j] 表示i,j 到右下角的最小路径之和
+    // dp 方程
+    // i !=0 && j != 0 dp[i][j] = dp[i][j] + Math.min(dp[i][j - 1], dp[i-1][j])
+    // i ==0 && j == 0 dp[i][j] = dp[i][j];
+    // i ==0 && j != 0 dp[i][j] = dp[i][j] + dp[i][j - 1];
+    // i !=0 && j == 0 dp[i][j] = dp[i][j] + dp[i-1][j];
+    
+	public int minPathSum(int[][] grid) {
+		if (grid == null || grid.length == 0) {
+			return 0;
+		}
+		for (int i = 0; i < grid.length; i++) {
+			for (int j = 0; j < grid[0].length; j++) {
+				if (i != 0 && j != 0) {
+					grid[i][j] = grid[i][j] + Math.min(grid[i][j - 1], grid[i - 1][j]);
+				}
+				if (i == 0 && j == 0) {
+					grid[i][j] = grid[i][j];
+				}
+				if (i == 0 && j != 0) {
+					grid[i][j] = grid[i][j] + grid[i][j - 1];
+				}
+				if (i != 0 && j == 0) {
+					grid[i][j] = grid[i][j] + grid[i - 1][j];
+				}
+			}
+		}
+
+		return grid[grid.length - 1][grid[0].length - 1];
+	}
+}
