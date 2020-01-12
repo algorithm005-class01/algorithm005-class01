@@ -83,3 +83,11 @@
 2. 从s.length到0开始遍历, 遇见( left++ 遇见 ) right++ . 当left == right max = Math.max(max, 2*left). left >= right left = right =0;
 
 max的值就是最大的.
+
+
+### https://leetcode-cn.com/problems/edit-distance/ 72. 编辑距离
+
+将字符串s1改写成s2. 需要的最少操作次数. 使用dp table表, 
+状态空间: dp[i][j] 0-i的字符串 改成 0-j的串  需要的次数
+解决问题: s1[i] == s2[j] dp[i][j] = dp[i-1][j-1]; 否则 Math.min(dp[i][j-1],dp[i-1][j],dp[i-1][j-1])+1 ;
+
