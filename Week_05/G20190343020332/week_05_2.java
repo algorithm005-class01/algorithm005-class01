@@ -1,44 +1,20 @@
 class Solution {
-	
-		// 穷举法
-		public int longestValidParentheses(String s) {
-        int longest = 0;
-        for(int i = 0; i < s.length(); i++)
-            for(int j = i + 2; j <= s.length(); j+=2)
-                if(isValidParentheses(s.substring(i, j)))
-                    longest = Math.max(longest, j-i);
-        return longest;            
-    }
+    public int minPathSum(int[][] grid) {
+        int m = grid.length;
+        int n = grid[0].length;
+        int dp[][] = new int[m][n];
 
-    public boolean isValidParentheses(String s){
-        Stack<Character> stack = new Stack<>();
-        for (int i = 0; i < s.length(); i++) {
-            if(s.charAt(i) == '(')
-                stack.push('(');
-            else if(!stack.empty())
-                stack.pop();
-            else 
-                return false;
-        }
-        return stack.empty();
-    }
-	
-	  // 动态规划
-    public int longestValidParentheses(String s) {
-        int longest = 0;
-        int dp[] = new int [s.length()];
-        for(int i = 1; i < s.length(); i++){
-            if(s.charAt(i) == ')'){
-                if(s.charAt(i-1) == '(')
-                    dp[i] = (i >= 2 ? dp[i-2] : 0) + 2;
-                else if(i > dp[i-1] && s.charAt(i-dp[i-1]-1) == '(')
-                    dp[i] = dp[i-1] + 2 + (i-dp[i-1] >= 2 ? dp[i-dp[i-1]-2] : 0);
-                longest = Math.max(longest, dp[i]);
-            }
-        }
-        return longest;            
-    }
+        dp[0][0] = grid[0][0];
+        for(int i = 1; i < n; i++)
+            dp[0][i] = dp[0][i-1] + grid[0][i]; 
 
+        for(int i = 1; i < m; i++)
+            dp[i][0] = dp[i-1][0] + grid[i][0];     
 
-    
+        for(int i = 1; i < m; i++)
+            for(int j = 1; j < n; j++)
+                dp[i][j] = Math.min(dp[i-1][j], dp[i][j-1]) + grid[i][j];
+
+        return dp[m-1][n-1];
+    }
 }
