@@ -53,3 +53,10 @@
 解决问题 当text1[i-1] == text2[j-1] ? dp[i][j] = dp[i-1][j-1] +1 : dp[i][j] = Math.max(dp[i-1][j] , dp[i][j-1]);
 
 
+### https://leetcode-cn.com/problems/triangle/ 120. 三角形最小路径和
+
+分治: f(i,j) = Math.min(f(i+1, j+1), f(i+1,j))+ f(i,j);
+状态空间: dp[i] i行的最小路径和
+解决问题: dp[j] = Math.min(dp[j],dp[j+1])+ triangle[i][j]
+
+### https://leetcode-cn.com/problems/longest-valid-parentheses/  32. 最长有效括号
