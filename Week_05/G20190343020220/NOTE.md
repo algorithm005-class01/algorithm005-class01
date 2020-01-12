@@ -60,3 +60,26 @@
 解决问题: dp[j] = Math.min(dp[j],dp[j+1])+ triangle[i][j]
 
 ### https://leetcode-cn.com/problems/longest-valid-parentheses/  32. 最长有效括号
+
+
+1. DP
+
+分治: 子问题 以)结尾的有效子串数量
+状态空间: dp[i] 0-i串中 有效子串的个数
+解决问题: 状态转移方程 
+```java
+                if (s.charAt(i - 1) == '(') {
+                    dp[i] = (i >= 2 ? dp[i - 2] : 0) + 2;
+                } else if (i - dp[i - 1] > 0 && s.charAt(i - dp[i - 1] - 1) == '(') {
+                    dp[i] = dp[i - 1] + (i - dp[i - 1] > 2 ? dp[i - dp[i - 1] - 2] : 0) + 2;
+                }
+```
+
+2. 双指针法
+
+使用left和right指针. 
+
+1. 从0到s.length遍历. 遇见( left++ 遇见 ) right++ . 当left == right max = Math.max(max, 2*right). right >= left left = right =0;
+2. 从s.length到0开始遍历, 遇见( left++ 遇见 ) right++ . 当left == right max = Math.max(max, 2*left). left >= right left = right =0;
+
+max的值就是最大的.
