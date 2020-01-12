@@ -17,38 +17,6 @@ package week005;
 解释: 因为路径 1→3→1→1→1 的总和最小。
  * */
 public class Leetcode_51_0182 {
-	
-    //  暴力递归， 超时， 加缓存为啥不行？
-	public int minPathSum2(int[][] grid) {
-    	if (grid == null) {
-    		return 0;
-    	}
-    	int[][] mem = new int[grid.length][grid[0].length];
-    	for (int i = 0; i < mem.length; i++) {
-    		for (int j = 0; j < mem.length; j++) {
-    			mem[i][j] = Integer.MAX_VALUE;
-    		}
-    	}
-        return helper(grid, 0, 0, mem);
-    }
-
-    public int helper(int[][] grid, int i, int j, int[][] mem){
-        if ((i == grid.length) || (j == grid[0].length)) {
-            return Integer.MAX_VALUE;
-        }
-        if ((i == grid.length - 1) && (j == grid[0].length -1)) {
-            return grid[i][j];
-        }
-        
-        if (mem[i][j] == Integer.MAX_VALUE) {
-            mem[i][j] =  grid[i][j] + Math.min(helper(grid, i + 1, j, mem), helper(grid, i, j + 1, mem));
-        }
-        
-        return mem[i][j];
-    }
-    
-    // 子问题
-    // problem = subproblemA + subproblemB
     // 状态定义
     // dp[i][j] 表示i,j 到右下角的最小路径之和
     // dp 方程
