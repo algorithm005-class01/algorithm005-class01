@@ -221,7 +221,7 @@ class Solution {
 2.mid 的取值
     mid=(low+high)/2 这种写法是有问题的。因为如果 low 和 high 比较大的话，两者之和就有可能会溢出。改进的方法是将 mid 的计算方式写成 low+(high-low)/2。
     如果要将性能优化到极致的话，我们可以将这里的除以 2 操作转化成位运算 low+((high-low)>>1)。因为相比除法运算来说，计算机处理位运算要快得多。
-3.left 和 right 的更新
+3.low 和 high 的更新
     low=mid+1，high=mid-1。注意这里的 +1 和 -1，如果直接写成 low=mid 或者 high=mid，就可能会发生死循环
 ~~~
 递归方式和非递归方式都可实现二分查找
