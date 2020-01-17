@@ -42,6 +42,17 @@ package leetcode.editor.cn;
 public class FriendCircles {
     public static void main(String[] args) {
         Solution solution = new FriendCircles().new Solution();
+        int[][] m = new int[3][3];
+        m[0][0] = 1;
+        m[0][1] = 1;
+        m[0][2] = 0;
+        m[1][0] = 1;
+        m[1][1] = 0;
+        m[1][2] = 1;
+        m[2][0] = 0;
+        m[2][1] = 1;
+        m[2][2] = 1;
+        System.out.println(solution.findCircleNum(m));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -51,9 +62,9 @@ public class FriendCircles {
             DisjointSet ds = new DisjointSet(n);
             for (int i = 0; i < n - 1; i++) {
                 for (int j = i + 1; j < n; j++) {
-                    if (M[i][j] == 1) {
+//                    if (M[i][j] == 1) {
                         ds.union(i, j);
-                    }
+//                    }
                 }
             }
             return ds.count;
@@ -73,7 +84,8 @@ public class FriendCircles {
 
             public int find(int p) {
                 while (p != parent[p]) {
-                    parent[p] = parent[parent[p]];
+                    int i = parent[p];
+                    parent[p] = parent[i];
                     p = parent[p];
                 }
                 return p;
