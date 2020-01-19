@@ -1,0 +1,79 @@
+class Solution {
+    func minMutation(_ start: String, _ end: String, _ bank: [String]) -> Int {
+          if(start == end){
+            return 1
+        }
+        
+        if(end == "" || start == ""){
+            return -1
+        }
+        
+        var inwordlist = false
+        for one in bank {
+            if(one == end){
+                inwordlist = true
+                break
+            }
+        }
+        
+        if(inwordlist == false){
+            return -1
+        }
+        
+        
+        var quee:[String] = [start]
+        
+        var visit:[Int] = Array.init(repeating: 0, count: bank.count)
+        
+        var level = 0
+        while quee.count > 0 {
+            
+            level += 1
+            let num = quee.count
+            
+            for _ in 0 ..< num{
+                
+                let one = quee.first
+                quee.remove(at: 0)
+                
+                var i = 0
+                while i < bank.count  {
+                    if(visit[i] == 0){
+                        let wordCharArray:[Character] = Array.init(bank[i])
+                        let oneCharArray:[Character] = Array.init(one!)
+                        
+                        if(wordCharArray.count != oneCharArray.count){
+                            continue
+                        }
+                        var j = 0
+                        var diff = 0
+                        while j < wordCharArray.count {
+                            if(wordCharArray[j] != oneCharArray[j]){
+                                diff += 1
+                            }
+                            j += 1
+                            if(diff >= 2){
+                                break
+                            }
+                        }
+                        
+                        if(diff == 1){
+                            if(bank[i] == end) {
+                                return level 
+                            }
+                            visit[i] = 1
+                            quee.append(bank[i])
+                        }
+                    }
+                    i += 1
+                    
+                }
+            }
+            
+            
+        }
+    
+        
+        return -1
+    }
+}
