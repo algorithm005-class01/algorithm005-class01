@@ -29,3 +29,5 @@ Trie树
 
 
 ### https://leetcode-cn.com/problems/friend-circles/ 547. 朋友圈
+
+并查集算法. 初始状态. 代表人员的数组都是孤岛. 每当建立关系时. 将他们的union(将两个节点连接起来, 数组表示就是value值为其中一个. ). 当结束时. 判断孤岛的数量, 就是朋友圈的数量
