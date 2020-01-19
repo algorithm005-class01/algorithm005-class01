@@ -32,16 +32,16 @@ class Trie {
     public Trie() {
         root = new TrieNode();
     }
-
-    public static void main(String[] args) {
-        Trie obj = new Trie();
-        String word = "ten";
-        obj.insert(word);
-        boolean param_2 = obj.search(word);
-        System.out.println(param_2);
-        boolean param_3 = obj.startsWith("te");
-        System.out.println(param_3);
-    }
+//
+//    public static void main(String[] args) {
+//        Trie obj = new Trie();
+//        String word = "ten";
+//        obj.insert(word);
+//        boolean param_2 = obj.search(word);
+//        System.out.println(param_2);
+//        boolean param_3 = obj.startsWith("te");
+//        System.out.println(param_3);
+//    }
 
     /**
      * Inserts a word into the trie.
