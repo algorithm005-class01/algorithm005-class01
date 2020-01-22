@@ -1,0 +1,104 @@
+
+
+class TrieNode {
+      var links:[Int:TrieNode]
+       
+       var isEnd:Bool
+        
+       init() {
+           links = [Int:TrieNode].init()
+           isEnd = false
+       }
+       
+       // private
+
+       func containsKey(_ c:Character) -> Bool {
+          let index  = c.asciiValue! - Character.init("a").asciiValue!
+          return links[Int(index)] != nil
+       }
+       
+       func put(_ c:Character,_ node :TrieNode)  {
+           links[Int(c.asciiValue! - Character.init("a").asciiValue!)] = node
+       }
+       
+       func get(_ c:Character) -> TrieNode? {
+          return links[Int(c.asciiValue! - Character.init("a").asciiValue!)]
+       }
+    
+
+}
+
+class Trie {
+
+    
+    var root:TrieNode
+    
+
+    /** Initialize your data structure here. */
+    init() {
+        root = TrieNode()
+    }
+    
+   
+    /** Inserts a word into the trie. */
+    func insert(_ word: String) {
+        if(word.count == 0){
+           return
+        }
+        
+        var node = root
+        for c:Character in word {
+            
+            if(false ==  node.containsKey(c)){
+                node.put(c, TrieNode())
+            }
+            print(node)
+            node = node.get(c)!
+    
+        }
+        node.isEnd = true
+    }
+    
+    
+    
+    /** Returns if the word is in the trie. */
+    func search(_ word: String) -> Bool {
+      let node =   p_startsWith(word)
+        return node != nil && node!.isEnd == true
+    }
+    
+    /** Returns if there is any word in the trie that starts with the given prefix. */
+    func startsWith(_ prefix: String) -> Bool {
+        
+        let node =  p_startsWith(prefix)
+        return node != nil
+    }
+    
+    
+    func p_startsWith(_ prefix: String) -> TrieNode?  {
+        var node = root
+        for c:Character in prefix {
+            
+            if(!node.containsKey(c)){
+                return nil
+            }
+            node = node.get(c)!
+        }
+        return node
+    }
+}
+
+
+ //* Your Trie object will be instantiated and called as such:
+let word = "hello"
+ let obj = Trie()
+obj.insert(word)
+ let ret_2: Bool = obj.search(word)
+let prefix = "h"
+let ret_3: Bool = obj.startsWith(prefix)
+ 
+
+
+
+
+
