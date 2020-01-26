@@ -1,8 +1,5 @@
 package G20190343020064;
 
-import org.junit.Test;
-
-import java.util.Timer;
 
 /**
  * <p>
@@ -60,40 +57,41 @@ public class LeetCode_208_0064 {
             TrieNode trieNode = this.searchPrefix(prefix);
             return trieNode != null;
         }
+
+        class TrieNode {
+
+            private TrieNode[] child;
+
+            private final int NUM = 26;
+
+            private boolean endFlag = false;
+
+            public TrieNode() {
+                child = new TrieNode[NUM];
+            }
+
+            private boolean contains(char ch) {
+                return child[ch - 'a'] != null;
+            }
+
+            private TrieNode get(char ch){
+                return child[ch - 'a'];
+            }
+
+            private TrieNode insert(char ch) {
+                child[ch - 'a'] = new TrieNode();
+                return child[ch - 'a'];
+            }
+
+            private void setEnd(){
+                this.endFlag = true;
+            }
+
+            private boolean isEnd() {
+                return this.endFlag;
+            }
+        }
     }
 
-    class TrieNode {
-
-        private TrieNode[] child;
-
-        private final int NUM = 26;
-
-        private boolean endFlag = false;
-
-        public TrieNode() {
-            child = new TrieNode[NUM];
-        }
-
-        private boolean contains(char ch) {
-            return child[ch - 'a'] != null;
-        }
-
-        private TrieNode get(char ch){
-            return child[ch - 'a'];
-        }
-
-        private TrieNode insert(char ch) {
-            child[ch - 'a'] = new TrieNode();
-            return child[ch - 'a'];
-        }
-
-        private void setEnd(){
-            this.endFlag = true;
-        }
-
-        private boolean isEnd() {
-            return this.endFlag;
-        }
-    }
 
 }
