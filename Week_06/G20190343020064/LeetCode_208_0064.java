@@ -26,44 +26,39 @@ public class LeetCode_208_0064 {
         public void insert(String word) {
             TrieNode temp = root;
             for(int i = 0; i < word.length(); i++) {
-                if (temp.contains(word.charAt(i))) {
-                    temp = temp.get(word.charAt(i));
+                char curChar = word.charAt(i);
+                if (temp.contains(curChar)) {
+                    temp = temp.get(curChar);
                 } else {
-                    temp = temp.insert(word.charAt(i));
+                    temp = temp.insert(curChar);
                 }
             }
             temp.setEnd();
         }
 
-        /** Returns if the word is in the trie. */
-        public boolean search(String word) {
+        public TrieNode searchPrefix(String word){
             TrieNode temp = root;
             for(int i = 0; i < word.length(); i++) {
-                if (temp == null) {return false;}
-                if (temp.contains(word.charAt(i))) {
-                    temp = temp.get(word.charAt(i));
+                char curChar = word.charAt(i);
+                if (temp.contains(curChar)) {
+                    temp = temp.get(curChar);
                 } else {
-                    temp = null;
+                    return null;
                 }
             }
-            return temp == null ? false : temp.isEnd();
+            return temp;
+        }
+
+        /** Returns if the word is in the trie. */
+        public boolean search(String word) {
+            TrieNode trieNode = this.searchPrefix(word);
+            return trieNode == null ? false : trieNode.isEnd();
         }
 
         /** Returns if there is any word in the trie that starts with the given prefix. */
         public boolean startsWith(String prefix) {
-            TrieNode temp = root;
-            for(int i = 0; i < prefix.length(); i++) {
-                if (temp == null) {
-                    return false;
-                }
-                if (temp.contains(prefix.charAt(i))) {
-                    temp = temp.get(prefix.charAt(i));
-                } else {
-                    return false;
-                }
-            }
-            return temp != null;
-
+            TrieNode trieNode = this.searchPrefix(prefix);
+            return trieNode != null;
         }
     }
 
