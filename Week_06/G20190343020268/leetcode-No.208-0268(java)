@@ -1,0 +1,74 @@
+
+//leetcode 208 实现前缀树
+import java.util.LinkedList;
+import java.util.List;
+
+class Trie {
+
+    private Node root=new Node();
+
+    class Node{
+        public List<String> value=new LinkedList<>();
+        public Node[] sons =new Node[26];
+    }
+
+    /** Initialize your data structure here. */
+    public Trie() {
+        
+    }
+    
+    /** Inserts a word into the trie. */
+    public void insert(String word) {
+        Node node=root;
+        for(String w:word.split("")){
+            Node temp=node.sons[getPosition(w)];
+            if(temp==null){
+                node.sons[getPosition(w)]=new Node();
+            }
+            node=node.sons[getPosition(w)];
+        }
+        node.value.add(word);
+    }
+
+    public int getPosition(String s){
+        return s.charAt(0)-'a';
+    }
+    
+    /** Returns if the word is in the trie. */
+    public boolean search(String word) {
+        Node node=root;
+
+        for(String s:word.split("")){
+            int position=getPosition(s);
+            if(node.sons[position]==null){
+                return false;
+            } else {
+                node=node.sons[position];
+            }
+
+        }
+        return node.value.contains(word);
+    }
+    
+    /** Returns if there is any word in the trie that starts with the given prefix. */
+    public boolean startsWith(String prefix) {
+
+        Node node=root;
+
+        for(String s:prefix.split("")){
+            int position=getPosition(s);
+            if(node.sons[position]==null){
+                return false;
+            } else {
+                node=node.sons[position];
+            }
+
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        Trie trie=new Trie();
+        trie.startsWith("a");
+    }
+}

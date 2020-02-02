@@ -57,7 +57,70 @@ func RobotSim(commands []int, obstacles [][]int) int {
 	return maxArea
 }
 
-//
+// 根据线上题解优化的方案
+func robotSim(commands []int, obstacles [][]int) int {
+	yAxis, xAxis := []int{1, 0, -1, 0}, []int{0, 1, 0, -1}
+	forward, x, y := 0, 0, 0
+	maxArea := 0
+
+	xMap, yMap := make(map[int][]int), make(map[int][]int)
+	for _, o := range obstacles {
+		xMap[o[0]], yMap[o[1]] = append(xMap[o[0]], o[1]), append(yMap[o[1]], o[0])
+	}
+
+	for _, v := range commands {
+		if v == -1 {
+			forward = (forward + 1) % 4
+		} else if v == -2 {
+			forward = (forward + 3) % 4
+		} else {
+			xcache, ycache, cacheBtn := 0, 0, false
+
+			if xAxis[forward] != 0 {
+				for _, xm := range yMap[y] {
+					if (x > xm && x+xAxis[forward]*v <= xm) || (x < xm && x+xAxis[forward]*v >= xm) {
+						xtest := xm - xAxis[forward]
+						if !cacheBtn || xtest*xAxis[forward] < xcache*xAxis[forward] {
+							cacheBtn = true
+							xcache = xtest
+						}
+					}
+				}
+			} else {
+				for _, ym := range xMap[x] {
+					if (y > ym && y+yAxis[forward]*v <= ym) || (y < ym && y+yAxis[forward]*v >= ym) {
+						ytest := ym - yAxis[forward]
+						if !cacheBtn || ytest*yAxis[forward] < ycache*yAxis[forward] {
+							cacheBtn = true
+							ycache = ytest
+						}
+					}
+				}
+			}
+
+			if !cacheBtn {
+				y += yAxis[forward] * v
+				x += xAxis[forward] * v
+			} else {
+				if xcache != 0 {
+					x = xcache
+				}
+				if ycache != 0 {
+					y = ycache
+				}
+			}
+		}
+
+		area := (x * x) + (y * y)
+		if maxArea < area {
+			maxArea = area
+		}
+	}
+
+	return maxArea
+}
+
+// 线上题解
 const BaseNum int = 100000
 
 type MovePoint struct {
