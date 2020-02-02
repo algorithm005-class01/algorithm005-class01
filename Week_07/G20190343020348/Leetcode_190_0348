@@ -1,0 +1,44 @@
+
+// 写的冗余了 
+uint32_t reverseBits(uint32_t n) {
+   uint32_t result = 0;
+    int i = 31;
+    while(i > 0) {
+        if(n & 1){
+            result = result | 1;
+        }
+        n = n >> 1;
+        result = result << 1;
+        i --;
+    }
+    
+    if(n > 0){
+        result = result | 1; 
+    }
+    return result;
+}
+
+//  更好方法
+uint32_t reverseBits(uint32_t n) {
+    uint32_t ans = 0;
+    for(int i = 0; i < 32; i++){
+        ans <<= 1;
+        ans += (n & 1);
+        n >>= 1;
+    }
+    return ans;
+}
+
+//按照位置 值1 
+class Solution {
+public:
+    uint32_t reverseBits(uint32_t n) {
+        uint32_t ret = 0;
+        for(int i = 31; i >= 0; i--) {
+            ret = ret | (((n>>(31-i)) & 1) << i);
+        }
+
+        return ret;
+    }
+};
+
