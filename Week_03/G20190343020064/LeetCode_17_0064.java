@@ -1,7 +1,7 @@
 package G20190343020064;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.awt.*;
+import java.util.*;
 import java.util.List;
 
 /**
@@ -16,93 +16,36 @@ public class LeetCode_17_0064 {
 
     private static List<String> result = new ArrayList<>();
 
+    private static Map<String, String> map = new HashMap<>();
+
     public List<String> letterCombinations(String digits) {
-        if ("".equals(digits)) {
-            return Collections.emptyList();
-        }
-        char[] chars = digits.toCharArray();
-        this.combinations(chars, 0, new char[digits.length()]);
+        map.put("2", "abc");
+        map.put("3", "def");
+        map.put("4", "ghi");
+        map.put("5", "jkl");
+        map.put("6", "mno");
+        map.put("7", "pqrs");
+        map.put("8", "tuv");
+        map.put("9", "wxyz");
+        this.letterCombinations(digits, map, 0,"");
         return result;
     }
 
-    public void combinations(char[] chars, int n, char[] str) {
-        if (n == chars.length) {
-            result.add(new String(str));
+    public void letterCombinations(String digits, Map<String, String> map, int index, String string) {
+        System.out.println(digits);
+        System.out.println(index);
+
+        if (index == digits.length()) {
+            if (!"".equals(string)) {
+                result.add(string);
+            }
             return;
         }
-
-        switch (chars[n]) {
-            case '2':
-                str[n] = 'a';
-                combinations(chars, n + 1, str);
-                str[n] = 'b';
-                combinations(chars, n + 1, str);
-                str[n] = 'c';
-                combinations(chars, n + 1, str);
-                break;
-            case '3':
-                str[n] = 'd';
-                combinations(chars, n + 1, str);
-                str[n] = 'e';
-                combinations(chars, n + 1, str);
-                str[n] = 'f';
-                combinations(chars, n + 1, str);
-                break;
-            case '4':
-                str[n] = 'g';
-                combinations(chars, n + 1, str);
-                str[n] = 'h';
-                combinations(chars, n + 1, str);
-                str[n] = 'i';
-                combinations(chars, n + 1, str);
-                break;
-            case '5':
-                str[n] = 'j';
-                combinations(chars, n + 1, str);
-                str[n] = 'k';
-                combinations(chars, n + 1, str);
-                str[n] = 'l';
-                combinations(chars, n + 1, str);
-                break;
-            case '6':
-                str[n] = 'm';
-                combinations(chars, n + 1, str);
-                str[n] = 'n';
-                combinations(chars, n + 1, str);
-                str[n] = 'o';
-                combinations(chars, n + 1, str);
-                break;
-            case '7':
-                str[n] = 'p';
-                combinations(chars, n + 1, str);
-                str[n] = 'q';
-                combinations(chars, n + 1, str);
-                str[n] = 'r';
-                combinations(chars, n + 1, str);
-                str[n] = 's';
-                combinations(chars, n + 1, str);
-                break;
-            case '8':
-                str[n] = 't';
-                combinations(chars, n + 1, str);
-                str[n] = 'u';
-                combinations(chars, n + 1, str);
-                str[n] = 'v';
-                combinations(chars, n + 1, str);
-                break;
-            case '9':
-                str[n] = 'w';
-                combinations(chars, n + 1, str);
-                str[n] = 'x';
-                combinations(chars, n + 1, str);
-                str[n] = 'y';
-                combinations(chars, n + 1, str);
-                str[n] = 'z';
-                combinations(chars, n + 1, str);
-                break;
+        String str  = map.get(String.valueOf(digits.charAt(index)));
+        for(int i = 0; i < str.length(); i++) {
+            this.letterCombinations(digits, map, index + 1, string + str.charAt(i));
         }
-
-
     }
+
 
 }

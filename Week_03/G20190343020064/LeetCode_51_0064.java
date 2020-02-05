@@ -1,5 +1,6 @@
 package G20190343020064;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,98 +17,98 @@ public class LeetCode_51_0064 {
     public List<List<String>> result = new ArrayList<>();
 
     /**
-     * 此处可优化 TODO
-     * 攻击范围
+     * ↘对角线  row - line = const [-n - n] 通过处理 -> +n -> [0 - 2n]
      */
-    public List<String> position = new ArrayList<>();
+    public int[] main;
+
+    /**
+     * ↙对角线 row + line = const [0 - 2n]
+     */
+    public int[] second;
+
+    /**
+     * 列是否占用
+     */
+    public int[] third;
 
     public List<List<String>> solveNQueens(int n) {
-        this.solve(0, n, new ArrayList<String>());
+        main = new int[2 * n];
+        second = new int[2 * n];
+        third = new int[n];
+        this.solveNQueens(n, 0, new int[n]);
         return result;
     }
 
-
-    public void solve(int begin, int n, List<String> list) {
-        if (begin == n) {
-            result.add(new ArrayList<>(list));
+    public void solveNQueens(int n, int row, int[] lines) {
+        if (row == n) {
+            result.add(this.convert(lines));
             return;
         }
         for (int i = 0; i < n; i++) {
-            // 校验当前位置是否可放入 不可则continue
-            if (position.contains(i + "," + begin)) {
+            if (!this.valid(row, i, n)) {
                 continue;
             }
-            // 放入棋盘 将不可放的位置记录
-            list.add(this.generateStr(n, i));
-            this.addPosition(i, begin, n);
-            // 当前可以放入则嗅探道下一层
-            solve(begin + 1, n, list);
-            list.remove(list.size() - 1);
-            this.removePosition(i, begin, n);
+            lines[row] = i;
+            this.solveNQueens(n, row + 1, lines);
+            lines[row] = 0;
+            this.removeCache(row, i, n);
         }
     }
 
     /**
-     * 此处可优化 TODO
-     * 通过皇后位置，将攻击范围加入 position
-     * 1,2
-     * <p>
-     * x: 行
-     * y: 列
-     * n: 纬度
+     * 判断当前位置是否有效
+     * 有效则记录该位置并返回
+     * 无效则直接返回结果
+     *
+     * @param row
+     * @param line
+     * @param n
+     * @return
      */
-    public void addPosition(int x, int y, int n) {
-        for (int i = y, j = 1; i < n; i++) {
-            // 计算左边对角线
-            if ((x - j) >= 0 && (y + j) < n) {
-                position.add((x - j) + "," + (y + j));
-            }
-            // 计算右边对角线
-            if ((x + j) < n && (y + j) < n) {
-                position.add((x + j) + "," + (y + j));
-            }
-            if ((y + j) < n) {
-                position.add(x + "," + (y + j));
-            }
-            j++;
+    public boolean valid(int row, int line, int n) {
+        int mainIndex = row - line + n;
+        int secondIndex = row + line;
+        boolean isValid = main[mainIndex] == 0 && second[secondIndex] == 0 && third[line] == 0;
+        if (isValid) {
+            main[mainIndex] = 1;
+            second[secondIndex] = 1;
+            third[line] = 1;
         }
+        return isValid;
     }
 
     /**
-     * 此处可优化 TODO
-     * 通过皇后位置，将攻击范围去除 position
-     * 1,2
-     * <p>
-     * x: 行
-     * y: 列
-     * n: 纬度
+     * 清除皇后存放缓存
      */
-    public void removePosition(int x, int y, int n) {
-        for (int i = y, j = 1; i < n; i++) {
-            // 计算左边对角线
-            if ((x - j) >= 0 && (y + j) < n) {
-                position.remove(position.lastIndexOf((x - j) + "," + (y + j)));
-            }
-            // 计算右边对角线
-            if ((x + j) < n && (y + j) < n) {
-                position.remove(position.lastIndexOf((x + j) + "," + (y + j)));
-            }
-            if ((y + j) < n) {
-                position.remove(position.lastIndexOf(x + "," + (y + j)));
-            }
-            j++;
-        }
+    public void removeCache(int row, int line, int n) {
+        int mainIndex = row - line + n;
+        int secondIndex = row + line;
+
+        main[mainIndex] = 0;
+        second[secondIndex] = 0;
+        third[line] = 0;
     }
 
-    public String generateStr(int n, int y) {
-        char[] str = new char[n];
-        for (int i = 0; i < str.length; i++) {
-            if (i == y) {
-                str[i] = 'Q';
-            } else {
-                str[i] = '.';
+    /**
+     * 生成棋盘
+     * @param lines
+     * @return
+     */
+    public List<String> convert(int[] lines){
+        List<String> list = new ArrayList<>();
+        for (int line : lines) {
+            StringBuilder str = new StringBuilder();
+            for(int i = 0; i < lines.length; i++) {
+                if (line == i) {
+                    str.append("Q");
+                } else {
+                    str.append(".");
+                }
             }
+            list.add(str.toString());
         }
-        return new String(str);
+        return list;
     }
+
+
 }
