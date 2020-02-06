@@ -44,59 +44,57 @@
 
 package leetcode.editor.cn;
 
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class WordLadder {
     public static void main(String[] args) {
         Solution solution = new WordLadder().new Solution();
-        List<String> list = List.of("hot", "dot", "dog", "lot", "log", "cog");
+        List<String> list = List.of("hot", "dog", "dot");
 
-        System.out.println(solution.ladderLength("hit", "cog", new ArrayList<>(list)));
+        System.out.println(solution.ladderLength("hot", "dog", new ArrayList<>(list)));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
+        Set<String> visited = new HashSet<>();
+
         public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+            if (!wordList.contains(endWord)) {
+                return 0;
+            }
             Deque<String> queue = new LinkedList<>();
             queue.add(beginWord);
-            wordList.remove(beginWord);
             int count = 0;
             while (!queue.isEmpty()) {
                 String pop = queue.pop();
-                count++;
                 if (pop.equals(endWord)) {
                     break;
                 }
-                String word = getWord(pop, endWord, wordList);
-                if (word != null) {
-                    queue.add(word);
-                }
-            }
-
-            return count;
-        }
-
-        private String getWord(String pop, String endWord, List<String> wordList) {
-
-            for (int i = 0; i < pop.length(); i++) {
-                char c = pop.charAt(i);
-                if (endWord.contains(c + "")) {
-                    continue;
-                }
-                for (String s : new ArrayList<>(wordList)) {
-                    for (int j = 0; j < s.length(); j++) {
-                        char c1 = s.charAt(j);
-                        if (c == c1) {
-                            wordList.remove(s);
-                            return s;
+                char[] chars = pop.toCharArray();
+                boolean gotWord = false;
+                for (int i = 0; i < pop.length() && !gotWord; i++) {
+                    for (char c = 'a'; c <= 'z' && !gotWord; c++) {
+                        char old = chars[i];
+                        chars[i] = c;
+                        String target = String.valueOf(chars);
+                        if (!visited.contains(target) && wordList.contains(target) && !target.equals(beginWord)) {
+                            visited.add(target);
+                            queue.add(target);
+                            count++;
+                            gotWord = true;
                         }
+                        chars[i] = old;
                     }
                 }
             }
-            return null;
+            System.out.println(visited);
+            return count;
+        }
+
+        private Set<String> getWord(String pop, String endWord, List<String> wordList) {
+            Set<String> tmp = new HashSet<>();
+
+            return tmp;
         }
 
     }
