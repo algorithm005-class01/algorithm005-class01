@@ -44,14 +44,17 @@
 
 package leetcode.editor.cn;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class WordLadder {
     public static void main(String[] args) {
         Solution solution = new WordLadder().new Solution();
-        List<String> list = List.of("hot", "dog", "dot");
+        List<String> list = List.of("hot", "dot", "dog", "lot", "log", "cog");
 
-        System.out.println(solution.ladderLength("hot", "dog", new ArrayList<>(list)));
+        System.out.println(solution.ladderLength("hit", "cog", new ArrayList<>(list)));
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -59,43 +62,82 @@ public class WordLadder {
         Set<String> visited = new HashSet<>();
 
         public int ladderLength(String beginWord, String endWord, List<String> wordList) {
-            if (!wordList.contains(endWord)) {
-                return 0;
-            }
-            Deque<String> queue = new LinkedList<>();
-            queue.add(beginWord);
-            int count = 0;
-            while (!queue.isEmpty()) {
-                String pop = queue.pop();
-                if (pop.equals(endWord)) {
-                    break;
+            Set<String> beginSet = new HashSet<>();
+            Set<String> endSet = new HashSet<>();
+            int count = 1;
+            beginSet.add(beginWord);
+            endSet.add(endWord);
+            while (!beginSet.isEmpty() && !endSet.isEmpty()) {
+                //优先选择少的遍历
+                if (beginSet.size() > endSet.size()) {
+                    Set<String> set = beginSet;
+                    beginSet = endSet;
+                    endSet = set;
                 }
-                char[] chars = pop.toCharArray();
-                boolean gotWord = false;
-                for (int i = 0; i < pop.length() && !gotWord; i++) {
-                    for (char c = 'a'; c <= 'z' && !gotWord; c++) {
-                        char old = chars[i];
-                        chars[i] = c;
-                        String target = String.valueOf(chars);
-                        if (!visited.contains(target) && wordList.contains(target) && !target.equals(beginWord)) {
-                            visited.add(target);
-                            queue.add(target);
-                            count++;
-                            gotWord = true;
+                Set<String> tmp = new HashSet<>();
+                for (String word : beginSet) {
+                    char[] chars = word.toCharArray();
+                    for (int i = 0; i < word.length(); i++) {
+                        for (char c = 'a'; c <= 'z'; c++) {
+                            char old = chars[i];
+                            chars[i] = c;
+                            String target = String.valueOf(chars);
+                            //相遇
+                            if (endSet.contains(target)) {
+                                return count + 1;
+                            }
+                            if (!visited.contains(target) && wordList.contains(target) && !target.equals(beginWord)) {
+                                visited.add(target);
+                                tmp.add(target);
+                            }
+                            chars[i] = old;
                         }
-                        chars[i] = old;
                     }
                 }
+                beginSet = tmp;
+                count++;
             }
-            System.out.println(visited);
             return count;
         }
 
-        private Set<String> getWord(String pop, String endWord, List<String> wordList) {
-            Set<String> tmp = new HashSet<>();
-
-            return tmp;
-        }
+//        public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+//            if (!wordList.contains(endWord)) {
+//                return 0;
+//            }
+//            Deque<String> queue = new LinkedList<>();
+//            queue.add(beginWord);
+//            int count = 0;
+//            while (!queue.isEmpty()) {
+//                String pop = queue.pop();
+//                if (pop.equals(endWord)) {
+//                    break;
+//                }
+//                char[] chars = pop.toCharArray();
+//                boolean gotWord = false;
+//                for (int i = 0; i < pop.length() && !gotWord; i++) {
+//                    for (char c = 'a'; c <= 'z' && !gotWord; c++) {
+//                        char old = chars[i];
+//                        chars[i] = c;
+//                        String target = String.valueOf(chars);
+//                        if (!visited.contains(target) && wordList.contains(target) && !target.equals(beginWord)) {
+//                            visited.add(target);
+//                            queue.add(target);
+//                            count++;
+//                            gotWord = true;
+//                        }
+//                        chars[i] = old;
+//                    }
+//                }
+//            }
+//            System.out.println(visited);
+//            return count;
+//        }
+//
+//        private Set<String> getWord(String pop, String endWord, List<String> wordList) {
+//            Set<String> tmp = new HashSet<>();
+//
+//            return tmp;
+//        }
 
     }
 //leetcode submit region end(Prohibit modification and deletion)
