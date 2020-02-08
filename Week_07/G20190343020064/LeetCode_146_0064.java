@@ -50,18 +50,6 @@ public class LeetCode_146_0064 {
 
     }
 
-    @Test
-    public void test() {
-        LRUCache2 cache = new LRUCache2(2);
-        cache.put(2, 1);
-        cache.put(1, 1);
-        cache.put(2, 3);       // 返回  1
-        cache.put(4, 1);    // 该操作会使得密钥 2 作废
-        cache.get(1);       // 返回 -1 (未找到)
-        cache.get(2);    // 该操作会使得密钥 1 作废
-
-    }
-
     class LRUCache2 {
 
         class Node {
