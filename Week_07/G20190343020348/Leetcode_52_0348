@@ -1,0 +1,45 @@
+class Solution {
+    func totalNQueens(_ n: Int) -> Int {
+         if n <= 0 {
+            return 0
+        }
+
+        var result = 0
+        let rowarray = [Int].init(repeating: 0, count: n+1)
+        
+        var nocol = [Int:Int]()
+        var nop = [Int:Int]()
+        var noNa = [Int:Int]()
+        
+        solveOneQueens(1,rowarray,&result,&nocol,&nop,&noNa)
+        return result
+    }
+
+    func solveOneQueens(_ row:Int , _ rowarray:[Int], _ result:inout Int, _ nocol:inout [Int:Int], _ nop:inout [Int:Int],_ noNa:inout [Int:Int])  {
+        if(row == rowarray.count){
+            result = result + 1 
+            return
+        }
+        
+        let n = rowarray.count
+    
+
+        for i in 1 ..< n{
+        
+            if((nocol[i] != nil) || (nop[row+i] != nil) || (noNa[row-i] != nil)){
+                continue
+            }else{
+                var  rowarraynext  = rowarray
+                rowarraynext[row] = i
+                nocol[i] = 1
+                nop[row+i] = 1
+                noNa[row-i] = 1
+                solveOneQueens(row+1,rowarraynext,&result,&nocol,&nop,&noNa)
+                
+                nocol[i] = nil
+                nop[row+i] = nil
+                noNa[row-i] = nil
+            }
+        }
+    }
+}
