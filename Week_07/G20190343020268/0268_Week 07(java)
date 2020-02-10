@@ -1,0 +1,15 @@
+//0268_Week 07(java)
+//231. 2的幂
+class Solution {
+    public boolean isPowerOfTwo(int n) {
+        int x = n >> 1;
+        int y = x << 1;
+        if((x==1 && y==n)|| n==1) {
+            return true;
+        } else if(n != y || n==0){
+                return false;
+        }else{
+            return isPowerOfTwo(x);
+        }
+    }
+}
