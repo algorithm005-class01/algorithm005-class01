@@ -2,7 +2,8 @@ package g20190343020320
 
 // 130.被围绕的区域
 // https://leetcode-cn.com/problems/surrounded-regions/
-func solve(board [][]byte) {
+
+func Solve(board [][]byte) {
 	if len(board) == 0 {
 		return
 	}
