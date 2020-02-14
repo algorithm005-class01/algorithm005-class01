@@ -1,6 +1,8 @@
 package G20190343020064;
 
 import java.util.ArrayList;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -41,5 +43,32 @@ public class LeetCode_429_0064 {
         for (Node child : root.children) {
             traversal(child, depth + 1, list);
         }
+    }
+
+    /**
+     * 层次遍历
+     * @param root
+     * @return
+     */
+    public List<List<Integer>> levelOrder2(Node root) {
+        List<List<Integer>> list = new ArrayList<>();
+        if (root == null) return list;
+        Deque<Node> deque = new LinkedList<>();
+        int level = 0;
+        deque.add(root);
+
+        while (!deque.isEmpty()){
+            list.add(new ArrayList<>());
+            int size = deque.size();
+            for(int i = 0; i < size; i++) {
+                Node node  = deque.remove();
+                list.get(level).add(node.val);
+                for (Node child : node.children) {
+                    deque.add(child);
+                }
+            }
+            level += 1;
+        }
+        return list;
     }
 }

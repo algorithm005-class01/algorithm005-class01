@@ -1,0 +1,41 @@
+//0268_Week 07(java)
+//231. 2的幂
+class Solution {
+    public boolean isPowerOfTwo(int n) {
+        int x = n >> 1;
+        int y = x << 1;
+        if((x==1 && y==n)|| n==1) {
+            return true;
+        } else if(n != y || n==0){
+                return false;
+        }else{
+            return isPowerOfTwo(x);
+        }
+    }
+}
+
+//0268_Week 07(java)
+//1122. 数组的相对排序
+class Solution {
+    public int[] relativeSortArray(int[] arr1, int[] arr2) {
+        int [] array=new int[1001];
+        int [] result=new int[arr1.length];
+        int j=0;
+        for(int i=0;i<arr1.length;i++){
+            array[arr1[i]]++;
+        }
+        for(int i:arr2){
+            while(array[i]>0){
+                result[j++]=i;
+                array[i]--;
+            }
+        }
+        for(int i=0;i<array.length;i++){
+            while(array[i]>0){
+                result[j++]=i;
+                array[i]--;
+            }
+        }
+        return result;
+    }
+}

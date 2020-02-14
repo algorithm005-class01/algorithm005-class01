@@ -43,40 +43,61 @@ public class NQueens {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         List<List<String>> result = new ArrayList<>();
-        Set<Integer> cols = new HashSet<>();//之前皇后攻击的位置
-        Set<Integer> pie = new HashSet<>();
-        Set<Integer> na = new HashSet<>();
 
         public List<List<String>> solveNQueens(int n) {
             List<String> list = new ArrayList<>();
-            dfs(n, 0, list);
+            Set<Integer> cols = new HashSet<>();//之前皇后占的位置
+            Set<Integer> pie = new HashSet<>(); //撇的攻击范围
+            Set<Integer> na = new HashSet<>();//捺的攻击范围
+            dfs(n, 0, cols, pie, na, list);
             return result;
 
         }
 
-        private void dfs(int n, int row, List<String> state) {
+        private void dfs(int n, int row, Set<Integer> cols, Set<Integer> pie, Set<Integer> na, List<String> state) {
             //terminator
             if (row >= n) {
-                result.add(state);
+                result.add(convert2board(state, n));
                 return;
             }
-            for (int i = 0; i < n; i++) {
-                //列是否已有皇后
-                boolean queExist = cols.contains(i);
-                boolean pieExist = pie.contains(row + i);
-                boolean naExist = na.contains(row - i);
+            //看每一列是否可以放
+            for (int col = 0; col < n; col++) {
+                boolean queExist = cols.contains(col);
+                boolean pieExist = pie.contains(row + col);
+                boolean naExist = na.contains(row - col);
                 if (queExist || pieExist || naExist) {
                     continue;
                 }
-                cols.add(i);
-                pie.add(row + i);
-                na.add(row - i);
-                state.add(String.valueOf(i));
-                dfs(n, row + 1, state);
-                cols.remove(i);
-                pie.remove(row + i);
-                na.remove(row - i);
+                //做选择
+                cols.add(col);
+                pie.add(row + col);
+                na.add(row - col);
+                state.add(String.valueOf(col));
+                System.out.println("row:" + row + " col:" + col + "" + ", pie:" + pie + ", na:" + na + ", state:" + state);
+
+                //下探新的一层
+                dfs(n, row + 1, cols, pie, na, state);
+
+                //撤销选择
+                cols.remove(col);
+                pie.remove(row + col);
+                na.remove(row - col);
+                state.remove(col + "");
             }
+        }
+
+        private List<String> convert2board(List<String> stack, int n) {
+            List<String> board = new ArrayList<>();
+            for (String s : stack) {
+                StringBuilder stringBuilder = new StringBuilder();
+                for (int i = 0; i < n; i++) {
+                    stringBuilder.append(".");
+                }
+                int num = Integer.valueOf(s);
+                stringBuilder.replace(num, num + 1, "Q");
+                board.add(stringBuilder.toString());
+            }
+            return board;
         }
 
     }
