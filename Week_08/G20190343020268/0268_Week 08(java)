@@ -1,0 +1,62 @@
+//0268_Week 08(java)
+//438. 找到字符串中所有字母异位词
+class Solution {
+	public List<Integer> findAnagrams(String s, String p) {
+			List<Integer> ret = new ArrayList<Integer>();
+			char[] s_array = s.toCharArray();
+			char[] p_array = p.toCharArray();
+			int pos = 0;
+			int[] data = new int[26];
+			for(char ch : p_array){
+				data[ch-'a']++;
+			}
+			for(int i=0;i<s_array.length;i++){
+				int m = s_array[i]-'a';
+				data[m]--;
+				while(data[m]<0){
+					data[s_array[pos]-'a']++;
+					pos++;
+				}
+				if(i-pos+1 == p_array.length){
+					ret.add(pos);
+					data[s_array[pos]-'a']++;
+					pos++;
+				}
+				
+			}
+			return ret;
+	}
+}
+
+
+//0268_Week 08(java)
+//5. 最长回文子串
+class Solution {
+	public int sub(String s, int left, int right){
+      while(left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)){
+            left--;
+            right++;
+        }
+        int length = right - left - 1;
+        return length;
+    }
+    
+    public String longestPalindrome(String s) {
+        int len = s.length();
+        if(len <= 1) return s; 
+        int max = 0;
+        String ret = null;
+        for(int i = 0; i < len; i++){
+            int m = sub(s, i, i);
+            int n = sub(s, i, i + 1);
+            int length = Math.max(m, n);
+            if(length > max){
+                int L = i - (length - 1) / 2; 
+                int R = i + length / 2;
+                max = length;
+                ret = s.substring(L, R + 1);
+            }
+        }
+        return ret;
+    }
+}
