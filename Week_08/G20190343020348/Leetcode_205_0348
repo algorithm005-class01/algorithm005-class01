@@ -1,0 +1,35 @@
+
+class Solution {
+    func isIsomorphic(_ s: String, _ t: String) -> Bool {
+        
+        if(s == t ){
+            return true
+        }
+        
+        var hash:[Character:Character] = [Character:Character]()
+        
+        let sarray = [Character].init(s)
+        let tarray = [Character].init(t)
+        
+        
+        var tset:Set<Character> = Set<Character>()
+        
+        
+        for i in 0 ..< sarray.count {
+            if(hash[sarray[i]] == nil ){
+                if(tset.contains(tarray[i]) == false){
+                    hash[sarray[i]] = tarray[i]
+                    tset.insert(tarray[i])
+                }else{
+                    return false
+                }
+            }else{
+                if(hash[sarray[i]] != tarray[i]){
+                    return false
+                }
+            }
+        }
+    
+        return true
+    }
+}
