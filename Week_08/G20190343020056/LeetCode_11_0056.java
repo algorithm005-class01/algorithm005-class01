@@ -1,3 +1,11 @@
+class Solution {
+  public boolean isMatch(String s, String p) {
+    WildCardMatcher w = new WildCardMatcher(p);
+    w.update(s);
+    return w.result();
+  }
+}
+
 class WildCardMatcher {
   private final char[] p;
   private boolean end = false, r = false;
@@ -96,13 +104,5 @@ class WildCardMatcher {
         return;
       }
     }
-  }
-}
-
-class Solution {
-  public boolean isMatch(String s, String p) {
-    WildCardMatcher w = new WildCardMatcher(p);
-    w.update(s);
-    return w.result();
   }
 }
