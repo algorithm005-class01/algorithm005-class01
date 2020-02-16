@@ -68,7 +68,7 @@ public class WordSearchIi {
 
         private void dfs(char[][] board, int i, int j, int m, int n, Trie trie) {
             char c = board[i][j];
-            trie.startsWith(c);
+            trie.startsWith(c + "");
         }
 
         class Trie {
