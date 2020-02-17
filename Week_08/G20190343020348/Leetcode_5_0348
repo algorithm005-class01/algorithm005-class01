@@ -1,0 +1,57 @@
+class Solution {
+    func longestPalindrome(_ s: String) -> String {
+ if s.count < 2{
+          return s
+        }
+        var maxLenght:Int = 0
+        var begin:Int = 0
+        var i:Int = 0
+        let slen = s.count
+        var beginIndex:Int = 0
+         var endindex:Int = 0
+        while i < slen {
+
+
+            
+            if (slen - i) <= (maxLenght / 2){
+                break
+            }
+            let beginchar =  s[s.index(s.startIndex, offsetBy: i)]
+            endindex = i
+            beginIndex = i
+            while endindex + 1 < slen {
+                let next =  s[s.index(s.startIndex, offsetBy: endindex + 1)]
+                if(next == beginchar){
+                    endindex += 1
+                }else{
+                    break
+                }
+            }
+            
+             i = endindex + 1
+            
+            
+            while endindex + 1 < slen && beginIndex - 1 >= 0 {
+                if s[s.index(s.startIndex, offsetBy: beginIndex - 1)]
+                    == s[s.index(s.startIndex, offsetBy: endindex + 1)]{
+                    endindex += 1
+                    beginIndex -= 1
+                }else{
+                    break
+                }
+                
+            }
+            
+            
+        
+            if(endindex - beginIndex > maxLenght){
+                maxLenght = endindex - beginIndex ;
+                begin = beginIndex
+            }
+            
+           
+            
+        }
+        return String(s[s.index(s.startIndex, offsetBy: begin) ... s.index(s.startIndex, offsetBy: begin+maxLenght )])
+    }
+}

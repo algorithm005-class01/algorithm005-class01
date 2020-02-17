@@ -1,0 +1,26 @@
+class Solution {
+    func lengthOfLIS(_ nums: [Int]) -> Int {
+        if (nums.count <= 1){
+            return nums.count
+        }
+        
+        
+        var dp:[Int] = [Int].init(repeating: 1, count: nums.count)
+        
+        var maxLength = 1;
+        
+        for i  in 1..<nums.count {
+            for j in 0..<i{
+                if(nums[i] > nums[j]){
+                    dp[i] = max(dp[j] + 1, dp[i])
+                }
+            }
+            if(dp[i] > maxLength){
+                maxLength = dp[i]
+            }
+        }
+        
+        return maxLength
+    
+    }
+}
