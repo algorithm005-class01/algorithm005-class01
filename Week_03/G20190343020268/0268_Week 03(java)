@@ -1,0 +1,195 @@
+
+//0268_Week 03(java)
+//包含72. 编辑距离 126.单词接龙II 127 单词接龙
+
+//72. 编辑距离
+class Solution {
+    public int minDistance(String word1, String word2) {
+        if (word1.length() == 0) return word2.length();
+        if (word2.length() == 0) return word1.length();
+        int m = word1.length(), n = word2.length();
+        int[] dp = new int[n + 1];
+        for (int i = 0; i <= n; i++) dp[i] = i; 
+        for (int i = 1; i <= m; i++) {
+            int temp = 0, pre = i - 1;
+            dp[0] = i;
+            for (int j = 1; j <= n; j++) {
+                temp = dp[j];
+                if (word1.charAt(i - 1) == word2.charAt(j - 1)) {
+                    dp[j] = pre;
+                } else {
+                    dp[j] = Math.min(dp[j], Math.min(dp[j-1], pre));
+                    dp[j]++;
+                }
+                pre = temp;
+            }
+        }
+        return dp[n];
+    }
+}
+
+//126.单词接龙II
+public class Solution {
+    public List<List<String>> findLadders(String beginWord, String endWord, List<String> wordList) {
+		List<List<String>> retListList = new ArrayList<>();
+		if(!wordList.contains(endWord)) {
+			return retListList;
+		}
+		if(!wordList.contains(beginWord)) {
+			wordList.add(beginWord);
+		}
+		HashMap<String, List<String>> from = new HashMap<>();
+		List<String> visited = new ArrayList<>();
+		HashMap<Integer, List<Integer>> nextWords = new HashMap<>();
+		for (int i = 0; i < wordList.size(); i++) {
+			nextWords.put(i, new ArrayList<>());
+		}
+		for (int i = 0; i < wordList.size(); i++) {
+			for (int j = i + 1; j < wordList.size(); j++) {
+				if(hasPath(wordList.get(i).toCharArray(), wordList.get(j).toCharArray())) {
+					nextWords.get(i).add(j);
+					nextWords.get(j).add(i);
+				}
+			}
+		}
+		Queue<String> queue = new LinkedList<>();
+		queue.add(beginWord);
+		visited.add(beginWord);
+		while(!queue.isEmpty()) {
+			int levelCount = queue.size();
+			List<String> tempVisited = new ArrayList<>();
+			while(levelCount-- > 0) {
+				String temp = queue.poll();
+				int n = wordList.indexOf(temp);
+				List<Integer> nextWord = nextWords.get(n);
+				for (int i = 0; i < nextWord.size(); i++) {
+					String string = wordList.get(nextWord.get(i));
+					if(!visited.contains(string)) {
+						if(!from.containsKey(string)) {
+							tempVisited.add(string);
+							queue.add(string);
+						}
+						if(from.containsKey(string)) {
+							List<String> tempList = from.get(string);
+							tempList.add(temp);
+							from.put(string, tempList);
+						}else {
+							List<String> tempList = new ArrayList<>();
+							tempList.add(temp);
+							from.put(string, tempList);
+						}
+					}
+				}
+			}
+			for (String string : tempVisited) {
+				visited.add(string);
+			}
+			if(visited.contains(endWord)) {
+				break;
+			}
+		}
+		from.put(beginWord, null);
+		dfs(beginWord, endWord, new ArrayList<>(), from, retListList);
+		return retListList;
+	}
+
+	private void dfs(String beginWord, String curWord, List<String> tempList, HashMap<String, List<String>> from, List<List<String>> templistList) {
+		if(curWord.equals(beginWord)) {
+			tempList.add(curWord);
+			Collections.reverse(tempList);
+			templistList.add(tempList);
+			return;
+		}
+		tempList.add(curWord);
+		if(from.get(curWord) != null) {
+			for (String string : from.get(curWord)) {
+				dfs(beginWord, string, new ArrayList<>(tempList), from, templistList);
+			}
+		}
+	}
+
+	private boolean hasPath(char[] arr1, char[] arr2) {
+		int diff = 0;
+		for (int i = 0; i < arr1.length; i++) {
+			if(arr1[i] != arr2[i]) {
+				diff++;
+			}
+		}
+		if(diff == 1) {
+			return true;
+		}
+		return false;
+	}
+
+}
+
+
+//127 单词接龙
+public class Solution {
+    class LevelWord {
+		String word;
+		int level;
+		public LevelWord(String word, int level) {
+			this.word = word;
+			this.level = level;
+		}
+		
+	}
+	
+	public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+		int end = wordList.indexOf(endWord);
+		if(end == -1) {
+			return 0;
+		}
+		if(!wordList.contains(beginWord)) {
+			wordList.add(beginWord);
+		}
+		boolean[][] nextWords = new boolean[wordList.size()][wordList.size()];
+		HashMap<String, Boolean> visited = new HashMap<>();
+        for (int i = 0; i < wordList.size(); i++) {
+        	for (int j = 0; j < i; j++) {
+        		if(hasPath(wordList.get(i).toCharArray(), wordList.get(j).toCharArray())) {
+        			nextWords[i][j] = nextWords[j][i] =	true;
+        		}
+			}
+        	visited.put(wordList.get(i), false);
+		}
+        Queue<LevelWord> queue = new LinkedList<>();
+        queue.add(new LevelWord(beginWord, 0));
+        visited.put(beginWord, true);
+        while(!queue.isEmpty()) {
+        	LevelWord temp = queue.poll();
+        	if(temp.word.equals(endWord)) {
+        		return temp.level + 1;
+        	}
+        	List<String> nextWord = new ArrayList<>();
+        	int n = wordList.indexOf(temp.word);
+        	for (int i = 0; i < nextWords[n].length; i++) {
+				if(nextWords[n][i]) {
+					nextWord.add(wordList.get(i));
+				}
+			}
+        	for (int i = 0; i < nextWord.size(); i++) {
+        		String nextTemp = nextWord.get(i);
+        		if(!visited.get(nextTemp)) {
+        			queue.add(new LevelWord(nextTemp, temp.level + 1));
+        			visited.put(nextTemp, true);
+        		}
+			}
+        }
+        return 0;
+    }
+	
+	private boolean hasPath(char[] arr1, char[] arr2) {
+		int diff = 0;
+		for (int i = 0; i < arr1.length; i++) {
+			if(arr1[i] != arr2[i]) {
+				diff++;
+			}
+		}
+		if(diff == 1) {
+			return true;
+		}
+		return false;
+	}
+}
