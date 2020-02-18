@@ -1,6 +1,6 @@
 
 //0268_Week 01(java)
-//leetcode 189.旋转数组
+//189.旋转数组
 class Solution {
 	public void rotate(int［] nums, int k) {
 		if (nums == nul1 || nums.length < 2) {
@@ -21,4 +21,21 @@ class Solution {
 			end--;
 		}
 	}
+}
+
+//26. 删除排序数组中的重复项
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        int back = 0;
+        for (int front = 1; front < nums.length; front++) {
+            if (nums[back] != nums[front]) {
+                back++;
+                nums[back] = nums[front];
+            }
+        }
+        return back + 1;
+    }
 }
