@@ -1,0 +1,34 @@
+class Solution {
+    func longestValidParentheses(_ s: String) -> Int {
+ var res = [Int]()
+        var max = 0
+        var start = 0
+        var i = 0
+        
+        for c in s {
+            if c == "(" {
+                res.append(i)
+            }else {
+                if(res.isEmpty){
+                    start = i + 1
+                }else{
+                    res.removeLast()
+                    if(res.isEmpty){
+                        let temp =  i - start + 1
+                        if(temp > max){
+                            max = temp
+                        }
+                    }else{
+                        let temp = i - res.last!;
+                        if(temp > max){
+                            max = temp
+                        }
+                    }
+                }
+            }
+            i += 1
+        }
+        
+        return max
+    }
+}

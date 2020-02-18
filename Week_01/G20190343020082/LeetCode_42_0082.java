@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 public class LeetCode_42_0082 {
 	public int trap(int[] height) {
 //		int result = 0;
