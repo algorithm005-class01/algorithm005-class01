@@ -1,5 +1,6 @@
 class Solution {
 public:
+	
     int longestValidParentheses(string s) {
         int size = s.length();
         int dp[size] = {0};

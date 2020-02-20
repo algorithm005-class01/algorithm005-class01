@@ -1,5 +1,6 @@
 class Solution {
 public:
+	
     int minimumTotal(vector<vector<int>>& triangle) {
         vector<vector<int>> dp(triangle);
         for(int i=triangle.size()-2; i>=0; i--) 

@@ -1,5 +1,6 @@
 class Solution {
 public:
+	
     int rob(vector<int>& nums) {
      int sum0 = 0, sum1 = 0;     
         for(int i = 0; i < nums.size(); ++i)
