@@ -36,7 +36,7 @@ class Solution {
         for (int i = start; i<=n; i++) {
             combine.add(i);
             combine(n, i+1, k-1, combine, lists);
-            combine.remove(combine.size()-1); //删掉最后一个包含5的不符合条件的
+            combine.remove(combine.size()-1); //重置状态
         }
     }
 }
