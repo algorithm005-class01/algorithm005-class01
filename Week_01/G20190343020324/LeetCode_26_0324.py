@@ -13,5 +13,3 @@ class Solution(object):
         
         return len(nums)
 
-a = Solution()
-print a.removeDuplicates([0,1,1,1,2,2,2,2,3,3,3,4,5,5])
